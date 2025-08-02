@@ -7,8 +7,8 @@ body {
 .site-header {
   background: linear-gradient(
     to bottom,
-    rgba(75, 0, 130, 0.6),
-    rgba(0, 0, 0, 0.6)
+    rgba(75, 0, 130, 0.7),
+    rgba(0, 0, 0, 0.7)
   );
   min-height: 100vh;
   display: flex;
@@ -31,15 +31,37 @@ body {
   background-clip: text;
 }
 
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* center the h2 + chevron */
+  cursor: pointer;
+  margin-top: 2rem;         /* if you want extra spacing */
+}
+
+.accordion-content {
+  margin-top: 1rem;
+}
+
 .site-content {
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   text-align: center;
   font-size: 1.5rem;
 }
 
+.site-header,
+.site-content h1,
+.site-content h2 {
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.8),
+    0 0 16px rgba(255, 224, 231, 0.5);
+}
+
 .site-content h1, 
+.site-content h2,
 .site-content h3, 
 .site-content p {
   color: transparent;
@@ -52,14 +74,61 @@ body {
   background-clip: text;
 }
 
-.site-content h3, 
-.site-content p {
+.site-content section > h2 {
+  padding-top: 5rem
+}
+
+.site-content h3 {
   text-align: left;
   padding: 0 20%;
 }
 
 .site-content section {
   margin-bottom: 2rem;
+}
+
+.site-content svg {
+  color: #ffe2e7;
+  font-size: 2rem;          
+  margin-right: 0.5rem;     
+}
+
+.site-content a {
+  color: #ffe2e7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.date-range {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  color: #888;
+  font-style: normal;
+  line-height: 0.001; 
+}
+
+.project-box {
+  width: 70%;
+  margin: 5rem auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 0.5rem;             /* inner spacing */
+  background-color: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
+}
+
+.project-box h3,
+.project-box p,
+.project-box small {
+  padding: 0 2rem;
+  text-align: left;
+}
+
+.project-box p svg {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  color: white;
 }
 
 .site-footer {

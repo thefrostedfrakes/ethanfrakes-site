@@ -7,6 +7,7 @@ export default function Header() {
         <header className="site-header">
             <img src={logo} className="site-logo" alt="logo" />
             <h1>Ethan Frakes</h1>
+            <p><small>Welcome to my website!</small></p>
             <nav>
                 <Link to="/">Home</Link> | {' '}
                 <Link to="/about">About</Link> | {' '}
