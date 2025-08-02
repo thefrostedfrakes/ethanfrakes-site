@@ -36,6 +36,18 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   text-align: center;
+  font-size: 1.5rem;
+}
+
+.site-content h2 {
+  color: transparent;
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #ffe2e7
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .site-content section {
