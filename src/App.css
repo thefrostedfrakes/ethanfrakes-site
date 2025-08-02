@@ -5,7 +5,11 @@ body {
 }
 
 .site-header {
-  background-color: #282c34;
+  background: linear-gradient(
+    to bottom,
+    rgba(75, 0, 130, 0.6),
+    rgba(0, 0, 0, 0.6)
+  );
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,14 +19,23 @@ body {
   color: white;
 }
 
+.site-header h1,
 .site-header nav a {
-  color: #61dafb;
-  text-decoration: none;
-  margin: 0 0.5rem;
+  color: transparent;
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #ffe2e7
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .site-content {
   padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
 }
 
 .site-content section {
@@ -30,7 +43,8 @@ body {
 }
 
 .site-footer {
-  background: #f1f1f1;
+  background: rgb(8, 0, 31);
+  color: white;
   text-align: center;
   padding: 1rem;
 }

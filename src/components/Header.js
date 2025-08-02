@@ -6,11 +6,11 @@ export default function Header() {
     return (
         <header className="site-header">
             <img src={logo} className="site-logo" alt="logo" />
-            <h1>My Website</h1>
+            <h1>Ethan Frakes</h1>
             <nav>
                 <Link to="/">Home</Link> | {' '}
                 <Link to="/about">About</Link> | {' '}
-                <Link to="/projects">Projects</Link> | {' '}
+                <Link to="/portfolio">Portfolio</Link> | {' '}
                 <Link to="/publications">Publications</Link> | {' '}
                 <Link to="/contact">Contact</Link> | {' '}
             </nav>
