@@ -55,14 +55,12 @@ export default function Publications() {
         </p>
 
         <div className="bibtex-wrapper">
-          <FiCopy
-          className="copy-icon"
-          onClick={copyBibtexGOKG}
-          title="Copy BibTeX"
-          />
-          <pre className="bibtex-block">
-            <code>{bibtex_gokg}</code>
-          </pre>
+          <button onClick={copyBibtexGOKG} className="bibtex-button" aria-label="Copy BibTeX">
+            <FiCopy className="copy-icon"/>
+          </button>
+            <pre className="bibtex-block">
+              <code>{bibtex_gokg}</code>
+            </pre>
         </div>
       </div>
 
@@ -81,14 +79,12 @@ export default function Publications() {
         </p>
 
         <div className="bibtex-wrapper">
-          <FiCopy
-          className="copy-icon"
-          onClick={copyBibtexSPIE}
-          title="Copy BibTeX"
-          />
-          <pre className="bibtex-block">
-            <code>{bibtex_spie}</code>
-          </pre>
+          <button onClick={copyBibtexSPIE} className="bibtex-button" aria-label="Copy BibTeX">
+            <FiCopy className="copy-icon"/>
+          </button>
+            <pre className="bibtex-block">
+              <code>{bibtex_spie}</code>
+            </pre>
         </div>
       </div>
     </main>
