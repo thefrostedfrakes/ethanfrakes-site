@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ethanfrakes-site/static/css/main.1b4ce07e.css",
-    "main.js": "/ethanfrakes-site/static/js/main.635b4807.js",
-    "static/js/453.ee5807c3.chunk.js": "/ethanfrakes-site/static/js/453.ee5807c3.chunk.js",
-    "static/media/Jost-Medium.woff2": "/ethanfrakes-site/static/media/Jost-Medium.8ebe953cb1a822c08adf.woff2",
-    "static/media/Futura.woff2": "/ethanfrakes-site/static/media/Futura.dcd9d58404bc2799b01e.woff2",
-    "index.html": "/ethanfrakes-site/index.html",
-    "main.1b4ce07e.css.map": "/ethanfrakes-site/static/css/main.1b4ce07e.css.map",
-    "main.635b4807.js.map": "/ethanfrakes-site/static/js/main.635b4807.js.map",
-    "453.ee5807c3.chunk.js.map": "/ethanfrakes-site/static/js/453.ee5807c3.chunk.js.map"
+    "main.css": "/static/css/main.ef2b987e.css",
+    "main.js": "/static/js/main.0ada97cc.js",
+    "static/js/453.ee5807c3.chunk.js": "/static/js/453.ee5807c3.chunk.js",
+    "static/media/Jost-Medium.woff2": "/static/media/Jost-Medium.8ebe953cb1a822c08adf.woff2",
+    "static/media/Futura.woff2": "/static/media/Futura.dcd9d58404bc2799b01e.woff2",
+    "index.html": "/index.html",
+    "main.ef2b987e.css.map": "/static/css/main.ef2b987e.css.map",
+    "main.0ada97cc.js.map": "/static/js/main.0ada97cc.js.map",
+    "453.ee5807c3.chunk.js.map": "/static/js/453.ee5807c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b4ce07e.css",
-    "static/js/main.635b4807.js"
+    "static/css/main.ef2b987e.css",
+    "static/js/main.0ada97cc.js"
   ]
 }
