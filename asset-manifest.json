@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ethanfrakes.com/static/css/main.1ae7d909.css",
-    "main.js": "/ethanfrakes.com/static/js/main.c6993d30.js",
-    "static/js/453.ee5807c3.chunk.js": "/ethanfrakes.com/static/js/453.ee5807c3.chunk.js",
-    "static/media/Jost-Medium.woff2": "/ethanfrakes.com/static/media/Jost-Medium.8ebe953cb1a822c08adf.woff2",
-    "static/media/Futura.woff2": "/ethanfrakes.com/static/media/Futura.dcd9d58404bc2799b01e.woff2",
-    "index.html": "/ethanfrakes.com/index.html",
-    "main.1ae7d909.css.map": "/ethanfrakes.com/static/css/main.1ae7d909.css.map",
-    "main.c6993d30.js.map": "/ethanfrakes.com/static/js/main.c6993d30.js.map",
-    "453.ee5807c3.chunk.js.map": "/ethanfrakes.com/static/js/453.ee5807c3.chunk.js.map"
+    "main.css": "/thefrostedfrakes.github.io/static/css/main.66e1c48e.css",
+    "main.js": "/thefrostedfrakes.github.io/static/js/main.acb1e895.js",
+    "static/js/453.ee5807c3.chunk.js": "/thefrostedfrakes.github.io/static/js/453.ee5807c3.chunk.js",
+    "static/media/Jost-Medium.woff2": "/thefrostedfrakes.github.io/static/media/Jost-Medium.8ebe953cb1a822c08adf.woff2",
+    "static/media/Futura.woff2": "/thefrostedfrakes.github.io/static/media/Futura.dcd9d58404bc2799b01e.woff2",
+    "index.html": "/thefrostedfrakes.github.io/index.html",
+    "main.66e1c48e.css.map": "/thefrostedfrakes.github.io/static/css/main.66e1c48e.css.map",
+    "main.acb1e895.js.map": "/thefrostedfrakes.github.io/static/js/main.acb1e895.js.map",
+    "453.ee5807c3.chunk.js.map": "/thefrostedfrakes.github.io/static/js/453.ee5807c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ae7d909.css",
-    "static/js/main.c6993d30.js"
+    "static/css/main.66e1c48e.css",
+    "static/js/main.acb1e895.js"
   ]
 }
