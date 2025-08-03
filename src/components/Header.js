@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../logo.svg';
 
 export default function Header() {
     return (
         <header className="site-header">
-            <img src={logo} className="site-logo" alt="logo" />
+            {/* <img src={logo} className="site-logo" alt="logo" /> */}
             <h1>Ethan Frakes</h1>
             <p><small>Welcome to my website!</small></p>
             <nav>

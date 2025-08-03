@@ -10,12 +10,12 @@ body {
     rgba(75, 0, 130, 0.6),
     rgba(0, 0, 0, 0.6)
   );
-  min-height: 100vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(15px + 2vmin);
   color: white;
 }
 
@@ -101,16 +101,16 @@ body {
 
 .date-range {
   display: block;
-  margin-top: 0.25rem;
   font-size: clamp(0.75rem, 2vw, 0.875rem);
   color: #888;
   font-style: normal;
   line-height: 0.001; 
+  margin-left: -2rem;
 }
 
-.project-box {
+.text-box {
   width: 70%;
-  margin: 5rem auto;
+  margin: 1.5rem auto;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
@@ -118,14 +118,18 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
 }
 
-.project-box h3,
-.project-box p,
-.project-box small {
+.text-box h3,
+.text-box p,
+.text-box small {
   padding: 0 2rem;
   text-align: left;
 }
 
-.project-box p svg {
+.text-box a {
+  padding-right: 2rem;
+}
+
+.text-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
   color: white;
@@ -133,7 +137,7 @@ body {
 
 .publication-box {
   width: 70%;
-  margin: 5rem auto;
+  margin: 2rem auto;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
@@ -142,8 +146,7 @@ body {
 }
 
 .publication-box h3,
-.publication-box p,
-.publication-box small {
+.publication-box p {
   padding: 0 2rem;
   text-align: left;
 }
