@@ -41,7 +41,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://thefrostedfrakes.github.io/ethanfrakes-site",
+  "homepage": "ethanfrakes.com",
   "devDependencies": {
     "gh-pages": "^6.3.0"
   }
