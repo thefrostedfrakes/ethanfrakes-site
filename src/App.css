@@ -10,7 +10,7 @@ body {
     rgba(75, 0, 130, 0.6),
     rgba(0, 0, 0, 0.6)
   );
-  min-height: 75vh;
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +45,8 @@ body {
 }
 
 .site-content {
-  padding: 2rem;
+  padding: 2rem 0;
+  padding-bottom: 10rem;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   text-align: center;
@@ -57,7 +58,7 @@ body {
 .site-content h2 {
   text-shadow:
     0 0 4px rgba(255, 255, 255, 0.8),
-    0 0 16px rgba(255, 224, 231, 0.5);
+    0 0 8px rgba(255, 224, 231, 0.5);
 }
 
 .site-content h1, 
@@ -109,7 +110,7 @@ body {
 }
 
 .text-box {
-  width: 70%;
+  width: 75%;
   margin: 1.5rem auto;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -123,6 +124,18 @@ body {
 .text-box small {
   padding: 0 2rem;
   text-align: left;
+}
+
+.text-box h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.text-box p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.text-box small {
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 .text-box a {
@@ -149,6 +162,18 @@ body {
 .publication-box p {
   padding: 0 2rem;
   text-align: left;
+}
+
+.publication-box h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.publication-box p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.publication-box small {
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
 }
 
 .publication-box p svg {
@@ -192,7 +217,7 @@ body {
 }
 
 .site-footer {
-  background: rgb(8, 0, 31);
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   text-align: center;
   padding: 1rem;

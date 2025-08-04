@@ -8,6 +8,7 @@ import {
   SiX, SiLatex, SiOverleaf
 } from 'react-icons/si';
 import { FaJava, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { TiHtml5 } from "react-icons/ti";
 import { DiW3C, DiScrum } from "react-icons/di";
 import { MdViewKanban } from "react-icons/md";
 import { TbSql } from "react-icons/tb";
@@ -38,6 +39,7 @@ export default function Portfolio() {
             <li><SiCplusplus/>C++</li><li><SiC /> C</li>
             <li><FaJava/>Java</li>
             <li><SiJavascript/>JavaScript</li>
+            <li><TiHtml5/>HTML</li>
             <li><SiDart/>Dart</li>
             <li><SiGnubash/>Bash</li>
             <li><TbSql/>SQL</li>
