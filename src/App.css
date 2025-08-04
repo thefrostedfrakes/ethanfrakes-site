@@ -32,6 +32,7 @@ body {
 }
 
 
+
 .accordion-header {
   display: flex;
   align-items: center;
@@ -57,8 +58,7 @@ body {
 .site-content h1,
 .site-content h2 {
   text-shadow:
-    0 0 4px rgba(255, 255, 255, 0.8),
-    0 0 8px rgba(255, 224, 231, 0.5);
+    0 0 10px rgba(255, 224, 231, 0.5);
 }
 
 .site-content h1, 
@@ -223,6 +223,12 @@ body {
   padding: 1rem;
 }
 
+.site-footer a {
+  color: #ffe2e7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .App {
   text-align: center;
 }
@@ -255,6 +261,12 @@ body {
   .site-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+canvas {
+  width: 100vw;
+  /* Use the “fixed” vh value you just calculated: */
+  height: calc(var(--vh) * 100);
 }
 
 @keyframes App-logo-spin {

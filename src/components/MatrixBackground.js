@@ -8,6 +8,18 @@ export default function MatrixBackground() {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/cmatrix';
     script.async = true;
+    const setVh = () => {
+      document.documentElement.style.setProperty(
+        '--vh',
+        `${window.innerHeight * 0.01}px`
+      );
+    };
+    // Set on load
+    setVh();
+    // Update on resize/orientation change
+    window.addEventListener('resize', setVh);
+    window.addEventListener('orientationchange', setVh);
+
     document.body.appendChild(script);
 
     // 2) once loaded, initialize the effect
