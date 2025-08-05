@@ -15,7 +15,7 @@ export default function About() {
           We're developing GeoOutageKG, a multimodal knowledge graph that links different power outage datasets together into one that captures both a high spatial and temporal resolution.
           We're also exploring methods on how to incorporate GeoOutageKG with LLMs for retrieving outage data using natural language as an interface.<br/><br/>
 
-          Outside of my professional interests, I am an avid enthusiast of Astronomy, Tech, Robotics, History, Films &amp; Filmmaking, Science Fiction, and a lot more.
+          Outside of my professional interests, I am an avid enthusiast of Astronomy, Tech, Robotics, History, Meteorology, Films &amp; Filmmaking, Science Fiction, and a lot more.
           But in many occasions, I find it important to enjoy the small things in life: having parties and going out with good friends, going for a good nature walk, and enjoying life with others.
           If you would like to reach out to talk about some of my professional work, or if you just would like to chat about common interests, feel free to contact me at any time!
         </p>

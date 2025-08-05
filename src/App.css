@@ -7,7 +7,7 @@ body {
 .site-header {
   background: linear-gradient(
     to bottom,
-    rgba(75, 0, 130, 0.6),
+    rgba(77, 32, 114, 0.6),
     rgba(0, 0, 0, 0.6)
   );
   min-height: 60vh;
@@ -30,8 +30,6 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
 }
-
-
 
 .accordion-header {
   display: flex;
@@ -66,13 +64,17 @@ body {
 .site-content h3, 
 .site-content p {
   color: transparent;
-  background: linear-gradient(
+  background-image: linear-gradient(
     to bottom,
     #ffffff,
-    #ffe2e7
+    #ffbec5
   );
+  background-repeat: repeat;
+  background-size: 100% 1.6em;
   -webkit-background-clip: text;
   background-clip: text;
+  background-position: 0 0;
+  overflow-wrap: anywhere;
 }
 
 .site-content section > h2 {
@@ -149,7 +151,7 @@ body {
 }
 
 .publication-box {
-  width: 70%;
+  width: 75%;
   margin: 2rem auto;
   border: 1px solid #ccc;
   border-radius: 10px;
