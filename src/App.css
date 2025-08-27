@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Jost', Helvetica, sans-serif;
+  font-family: 'Orbitron', Helvetica, sans-serif;
   line-height: 1.6;
 }
 
@@ -17,6 +17,12 @@ body {
   justify-content: center;
   font-size: calc(15px + 2vmin);
   color: white;
+}
+
+.site-header nav {
+  width: 100%;         /* or: align-self: stretch; */
+  text-align: center;  /* centers wrapped lines */
+  padding: 0 1rem;     /* optional: a little breathing room */
 }
 
 .site-header h1,
@@ -119,6 +125,7 @@ body {
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
+  font-family: 'Jost', Helvetica, sans-serif;
 }
 
 .text-box h3,
@@ -158,6 +165,7 @@ body {
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
+  font-family: 'Jost', Helvetica, sans-serif;
 }
 
 .publication-box h3,
@@ -280,7 +288,6 @@ canvas {
   }
 }
 
-/* Regular weight */
 @font-face {
   font-family: 'Futura';
   src: url('./fonts/Futura.woff2') format('woff2');
@@ -290,10 +297,17 @@ canvas {
 }
 
 
-/* Regular weight */
 @font-face {
   font-family: 'Jost';
   src: url('./fonts/Jost-Medium.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./fonts/Orbitron-Medium.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
