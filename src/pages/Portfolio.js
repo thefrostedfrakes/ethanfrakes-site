@@ -5,7 +5,7 @@ import {
   SiHuggingface, SiNvidia, SiReact, SiFlutter, SiAndroidstudio,
   SiRos, SiLinux, SiDebian, SiCentos, SiUbuntu,
   SiPostgresql, SiMongodb, SiGit, SiGithub, SiArxiv, SiOsf, SiInstagram, 
-  SiX, SiLatex, SiOverleaf
+  SiDiscord, SiLatex, SiOverleaf
 } from 'react-icons/si';
 import { FaJava, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { TiHtml5 } from "react-icons/ti";
@@ -139,7 +139,7 @@ export default function Portfolio() {
 
               <SiGithub/><a href="https://github.com/thefrostedfrakes/UCF-Crimes">GitHub Repository</a>
               <SiInstagram/><a href="https://www.instagram.com/ucfcrimes">Instagram</a>
-              <SiX/><a href="https://x.com/UCFCrimes">X/Twitter</a>
+              <SiDiscord/><a href="https://discord.gg/Ph69Wktxfz">Discord</a>
             </p>
           </div>
           <div className="text-box">
