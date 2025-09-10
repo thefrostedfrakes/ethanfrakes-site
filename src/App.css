@@ -42,7 +42,7 @@ body {
 
   margin: 0;
   z-index: 1000;                                /* above matrix canvas */
-  font-size: 2rem;
+  font-size: min(2vw, 35px);
 }
 
 /* Links inside the bar: solid color (override your gradient text) */
