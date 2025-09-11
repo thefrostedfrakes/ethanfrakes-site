@@ -44,7 +44,7 @@ body {
 .site-logo-link {
   display: inline-block;
   margin-right: auto;   /* push links to center while logo stays left */
-  margin-left: 5vw;     /* keep the 5vw padding from left */
+  margin-left: 1vw;     /* keep the 5vw padding from left */
   text-decoration: none;
 }
 
