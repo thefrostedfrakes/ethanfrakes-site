@@ -1,6 +1,7 @@
 // Header.js
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../logo.png';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,9 @@ export default function Header() {
     <header className="site-header">
       <nav className={`site-nav ${open ? 'is-open' : ''}`}>
         <div className="site-nav__inner">
+          <Link to="/" className="site-logo-link">
+            <img src={logo} className="site-logo" alt="website logo" />
+          </Link>
           {/* centered links (desktop), hidden on mobile until toggled */}
           <div id="primary-navigation" className="site-nav__links">
             <Link to="/">Home</Link>{' '}
