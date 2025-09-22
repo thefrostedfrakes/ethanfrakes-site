@@ -103,8 +103,8 @@ export default function MatrixBackground() {
     ];
 
     const fontSize = 12;
-    const speed = 6;
-    const lineSpacing = 1.3;
+    const speed = 5;
+    const lineSpacing = 1.8;
     const matrix = new Matrix(canvas, color, fontSize, charRanges, speed, lineSpacing);
 
     const handleResize = () => matrix.onResize();
@@ -136,7 +136,7 @@ export default function MatrixBackground() {
         width: "100vw",
         height: "100vh",
         display: "block",
-        zIndex: -1, // sit behind your content
+        zIndex: -1,
       }}
     />
   );
