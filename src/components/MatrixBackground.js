@@ -67,7 +67,7 @@ class Matrix {
 
         // Text style
         this.ctx.fillStyle = `rgb(${this.color[0]},${this.color[1]},${this.color[2]})`;
-        this.ctx.font = `${this.fontSize}px monospace`;
+        this.ctx.font = `${this.fontSize}px hina mincho, times new roman`;
         this.ctx.textBaseline = 'top';
 
         const rows = this.h / this.fontSize;
