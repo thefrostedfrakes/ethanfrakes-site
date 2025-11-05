@@ -135,7 +135,7 @@ export default function Portfolio() {
               UCF Crimes utilizes a back- and front-end framework for reading and parsing crimes from the official UCF crime report log and posting crimes daily.<br/>
               - Back end: reads from daily crime report log posted every night, parses returned string containing crime data, and adds crime reports and information to SQL database, including the crime type, report date & time, disposition, and address. While adding to database, crime address is geocoded using the Google Maps Geocoder API, then nearest place marker is identified using Google Places API. Both geocoded data and raw data from PDF are added to database.<br/>
               - Front-end: Posts to Instagram account using API daily with crime title, place marker name, report date/time, and disposition, along with image of map with location from geocoded coordinates of address. Also posts daily to Discord server using Discord API, where users can also query individual crime reports by title, report date, disposition, address, or place name.<br/>
-              Have so far parsed over 1,900 crime reports and all available to query in the database.<br/><br/>
+              Have so far parsed over 2,100 crime reports and all available to query in the database.<br/><br/>
 
               <SiGithub/><a href="https://github.com/thefrostedfrakes/UCF-Crimes">GitHub Repository</a>
               <SiInstagram/><a href="https://www.instagram.com/ucfcrimes">Instagram</a>

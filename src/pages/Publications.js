@@ -2,14 +2,21 @@ import React from 'react';
 import { FiCopy } from 'react-icons/fi';
 
 export default function Publications() {
-  const bibtex_gokg = `@misc{frakes2025geooutagekgmultimodalgeospatiotemporalknowledge,
-  title={GeoOutageKG: A Multimodal Geospatiotemporal Knowledge Graph for Multiresolution Power Outage Analysis},
-  author={Ethan Frakes and Yinghui Wu and Roger H. French and Mengjie Li},
+  const bibtex_gokg = `@InProceedings{geooutagekg,
+  author={Frakes, Ethan and Wu, Yinghui and French, Roger H. and Li, Mengjie},
+  editor={Garijo, Daniel and Kirrane, Sabrina and Salatino, Angelo and Shimizu, Cogan and Acosta, Maribel and Nuzzolese, Andrea Giovanni and Ferrada, Sebasti{\\'a}n and Soulard, Thibaut and Kozaki, Kouji and Takeda, Hideaki and Gentile, Anna Lisa},
+  title={{GeoOutageKG}: A Multimodal Geospatiotemporal Knowledge Graph for Multiresolution Power Outage Analysis},
+  booktitle={The Semantic Web -- ISWC 2025},
   year={2025},
+  month={10},
+  publisher={Springer Nature Switzerland},
+  address={Cham},
+  pages={221--239},
+  isbn={978-3-032-09530-5},
+  doi={10.1007/978-3-032-09530-5_13},
   eprint={2507.22878},
-  archivePrefix={arXiv},
-  primaryClass={cs.IR},
-  url={https://arxiv.org/abs/2507.22878},
+  eprinttype={arxiv},
+  eprintclass={cs.IR}
 }`;
 
   const bibtex_spie = `@inproceedings{frakes2024efficient,
@@ -44,13 +51,13 @@ export default function Publications() {
         <h3>GeoOutageKG: A Multimodal Geospatiotemporal Knowledge Graph for Multiresolution Power Outage Analysis</h3>
         <p><small>Accepted into the 24th International Semantic Web Conference (ISWC 2025), November 2-6, 2025</small></p>
         <p>
-          Frakes, E., Wu, Y., French, R. H., &amp; Li, M. (2025, July 30). GeoOutageKG: A multimodal geospatiotemporal knowledge graph for multiresolution power outage analysis. arXiv.org. {' '}
+          Frakes, E., Wu, Y., French, R. H., &amp; Li, M. (2025, October). GeoOutageKG: A multimodal geospatiotemporal knowledge graph for multiresolution power outage analysis. In The Semantic Web -- ISWC 2025 (pp. 221-239). Springer Nature Switzerland. {' '}
           <a
-            href="https://doi.org/10.48550/arXiv.2507.22878"
+            href="https://doi.org/10.1007/978-3-032-09530-5_13"
             target="_blank"
             rel="noopener noreferrer"
           >
-            https://doi.org/10.48550/arXiv.2507.22878
+            https://doi.org/10.1007/978-3-032-09530-5_13
           </a> 
         </p>
 
