@@ -116,7 +116,7 @@ export default function Portfolio() {
             <p>
               GeoOutageKG is a multimodal knowledge graph that integrates power outage data sources from multiple databases, namely NASA's Black Marble dataset and the DOE's EAGLE-I dataset.
               The source datasets contain either nighttime light (NTL) satellite imagery with high spatial resolution but low temporal resolution, or county-wise outage data with frequent temporal updates but low spatial resolution.
-              The data is curated by their spatial and temporal regions and linked together into a geospatiotemporal knowledge grpah.
+              The data is curated by their spatial and temporal regions and linked together into a geospatiotemporal knowledge graph.
               The source ontology, GeoOutageOnto, contains 3 novel data classes for numeric outage records, nightly NTL images, and power outage maps following major hurricane events.
               GeoOutageKG is a large knowledge graph with over 10.6 million outage record instances, 300,000 NTL image instances, and 15,000 outage map instances.<br/><br/>
 
@@ -135,7 +135,7 @@ export default function Portfolio() {
               UCF Crimes utilizes a back- and front-end framework for reading and parsing crimes from the official UCF crime report log and posting crimes daily.<br/>
               - Back end: reads from daily crime report log posted every night, parses returned string containing crime data, and adds crime reports and information to SQL database, including the crime type, report date & time, disposition, and address. While adding to database, crime address is geocoded using the Google Maps Geocoder API, then nearest place marker is identified using Google Places API. Both geocoded data and raw data from PDF are added to database.<br/>
               - Front-end: Posts to Instagram account using API daily with crime title, place marker name, report date/time, and disposition, along with image of map with location from geocoded coordinates of address. Also posts daily to Discord server using Discord API, where users can also query individual crime reports by title, report date, disposition, address, or place name.<br/>
-              Have so far parsed over 2,100 crime reports and all available to query in the database.<br/><br/>
+              Have so far parsed over 2,200 crime reports and all available to query in the database.<br/><br/>
 
               <SiGithub/><a href="https://github.com/thefrostedfrakes/UCF-Crimes">GitHub Repository</a>
               <SiInstagram/><a href="https://www.instagram.com/ucfcrimes">Instagram</a>
