@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
   SiPython, SiCplusplus, SiC, SiJavascript, SiDart, SiGnubash,
-  SiPytorch, SiOpencv, SiRoboflow, SiNumpy, SiPandas, SiScikitlearn,
+  SiPytorch, SiLangchain, SiOpencv, SiRoboflow, SiNumpy, SiPandas,
   SiHuggingface, SiNvidia, SiReact, SiFlutter, SiAndroidstudio,
-  SiRos, SiLinux, SiDebian, SiCentos, SiUbuntu,
+  SiRos, SiLinux, SiDebian, SiCentos, SiUbuntu, SiRedhat,
   SiPostgresql, SiMongodb, SiGit, SiGithub, SiArxiv, SiOsf, SiInstagram, 
   SiDiscord, SiLatex, SiOverleaf
 } from 'react-icons/si';
@@ -48,11 +48,11 @@ export default function Portfolio() {
           <h3>AI, CV, &amp; Data Science:</h3> 
           <ul className="skills-list">
             <li><SiPytorch/>PyTorch</li>
+            <li><SiLangchain/>LangChain</li>
             <li><SiOpencv/>OpenCV</li>
             <li><SiRoboflow/>Roboflow</li>
             <li><SiNumpy/>Numpy</li>
             <li><SiPandas/>Pandas</li>
-            <li><SiScikitlearn/>Scikit-Learn</li>
             <li><SiHuggingface/>Hugging Face</li>
             <li><SiNvidia/>CUDA</li>
             <li>Matplotlib</li>
@@ -78,11 +78,13 @@ export default function Portfolio() {
             <li><SiDebian/>Debian</li>
             <li><SiCentos/>CentOS</li>
             <li><SiUbuntu/>Ubuntu</li>
+            <li><SiRedhat/>RHEL</li>
           </ul>
           <h3>Databases:</h3>
           <ul className="skills-list">
             <li><SiPostgresql/>PostgreSQL</li>
             <li><SiMongodb/>MongoDB</li>
+            <li>GraphDB</li>
           </ul>
           <h3>Robotics:</h3> 
           <ul className="skills-list">
@@ -117,10 +119,10 @@ export default function Portfolio() {
               GeoOutageKG is a multimodal knowledge graph that integrates power outage data sources from multiple databases, namely NASA's Black Marble dataset and the DOE's EAGLE-I dataset.
               The source datasets contain either nighttime light (NTL) satellite imagery with high spatial resolution but low temporal resolution, or county-wise outage data with frequent temporal updates but low spatial resolution.
               The data is curated by their spatial and temporal regions and linked together into a geospatiotemporal knowledge graph.
-              The source ontology, GeoOutageOnto, contains 3 novel data classes for numeric outage records, nightly NTL images, and power outage maps following major hurricane events.
-              GeoOutageKG is a large knowledge graph with over 10.6 million outage record instances, 300,000 NTL image instances, and 15,000 outage map instances.<br/><br/>
+              The source ontology, GeoOutageOnto, contains 3 novel data classes for numeric outage records, nightly NTL images, and power outage maps calculated using the NTL imagery.
+              GeoOutageKG is a large knowledge graph with over 10.6 million outage record instances, 300,000 NTL image instances, and 190,000 outage map instances.<br/><br/>
 
-              The paper for GeoOutageKG has been accepted to the 24th International Semantic Web Conference (ISWC 2025), which will be held this November.<br/>
+              GeoOutageKG was accepted to and published in the 24th International Semantic Web Conference (ISWC 2025) in Nara, Japan. The citation can be found on the Publications page.<br/><br/>
 
               <SiGithub/><a href="https://purl.org/geooutagekg">GitHub Repository</a>
               <SiOsf/><a href="https://doi.org/10.17605/OSF.IO/QVD8B">OSF Repository</a>
@@ -135,7 +137,7 @@ export default function Portfolio() {
               UCF Crimes utilizes a back- and front-end framework for reading and parsing crimes from the official UCF crime report log and posting crimes daily.<br/>
               - Back end: reads from daily crime report log posted every night, parses returned string containing crime data, and adds crime reports and information to SQL database, including the crime type, report date & time, disposition, and address. While adding to database, crime address is geocoded using the Google Maps Geocoder API, then nearest place marker is identified using Google Places API. Both geocoded data and raw data from PDF are added to database.<br/>
               - Front-end: Posts to Instagram account using API daily with crime title, place marker name, report date/time, and disposition, along with image of map with location from geocoded coordinates of address. Also posts daily to Discord server using Discord API, where users can also query individual crime reports by title, report date, disposition, address, or place name.<br/>
-              Have so far parsed over 2,200 crime reports and all available to query in the database.<br/><br/>
+              Have so far parsed over 2,300 crime reports and all available to query in the database.<br/><br/>
 
               <SiGithub/><a href="https://github.com/thefrostedfrakes/UCF-Crimes">GitHub Repository</a>
               <SiInstagram/><a href="https://www.instagram.com/ucfcrimes">Instagram</a>
@@ -181,7 +183,8 @@ export default function Portfolio() {
             <p><small className="date-range">February 2025 - Present</small></p>
             <p>
               - Researching Ontologies, Knowledge Graphs, AI Reasoning, and Graph Neural Networks (GNNs) for use in power outage detection, analysis, and dataset management with Dr. Mengjie Li.<br/>
-              - Developing GeoOutageKG, a multimodal knowledge graph for geospatiotemporal power outage data and analysis. More info on GeoOutageKG can be found in its project section.
+              - Developed GeoOutageKG, a multimodal knowledge graph for geospatiotemporal power outage data and analysis. More info on GeoOutageKG can be found in its project section.<br/>
+              - Currently researching and working on multimodal reasoning agents with RAG-based tool libraries for data integration and interpretation.
             </p>
           </div>
           <div className="text-box">
