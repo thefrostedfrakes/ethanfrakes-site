@@ -6,18 +6,20 @@ export default function About() {
       <h1>About</h1>
       <div className="text-box">
         <p>
-          I am a software and AI researcher and developer with a strong focus on cutting-edge technologies that bridge structured knowledge and intelligent systems. 
-          My current work primarily focuses on the Semantic Web, Knowledge Graphs, Graph Neural Networks (GNNs), and Generative AI.
-          I explore ways to make unstructured and unlinked data into a more interoperable and semantically-enriched format.
-          I am especially as of current heavily involved in Semantic Web technologies that assist in disaster mitigation following power outages, as well as in materials science and energy production/resilience.<br/><br/>
+          I am an incoming PhD student at the University of Central Florida's School of Modeling, Simulation and Training. Previously, I received my B.S. degree in Computer Science, also from UCF.
+          I have a strong focus on researching and developing cutting-edge technologies that bridge structured knowledge and intelligent systems. 
+          My current work primarily focuses on utilizing the Semantic Web, Knowledge Graphs, Neuro-symbolic AI, and multi-agent systems for energy resilience planning, outage detection, disaster response, and power grid management.
+          As we enter a new era dominated by AI & renewable energy, I am particularly interested in integrating these technologies to address the challenges of modern energy systems' complexity, demand, and reliability.
+          I'm also interested in exploring the intersection of these technologies with other domains, such as materials science, robotics, and human-computer interaction.<br/><br/>
 
-          Currently, I'm working at the University of Central Florida HENAT Lab with Dr. Mengjie Li on Semantic Data, Knowledge Graphs, and GNNs. 
-          We're developing GeoOutageKG, a multimodal knowledge graph that links different power outage datasets together into one that captures both a high spatial and temporal resolution.
-          We're also exploring methods on how to incorporate GeoOutageKG with LLMs for retrieving outage data using natural language as an interface.<br/><br/>
+          Currently, I'm working at UCF's SAGE Lab with Dr. Mengjie Li. 
+          We're developing GeoResilience, a knowledge-graph-powered platform for monitoring, analyzing, and strengthening the resilience of a power grid increasingly strained by disasters, adversarial attacks, aging infrastructure, and rising demand.
+          It brings together GeoOutageKG, a multimodal knowledge graph capturing outages at both a high spatial and temporal resolution, the GeoOutageOnto ontology, and the GeoOutageBench evaluation suite.
+          Going forward, we're working to integrate GeoResilience into a multi-agent system for energy resilience planning, along with detecting outages, reasoning about their causes, and proposing solutions.<br/><br/>
 
-          Outside of my professional interests, I am an avid enthusiast of Astronomy, Tech, Robotics, History, Meteorology, Films &amp; Filmmaking, Science Fiction, and a lot more.
+          Outside of my professional interests, I am an avid enthusiast of Tech, Robotics, History, Astronomy, Meteorology, Films, Science Fiction, and a lot more.
           But in many occasions, I find it important to enjoy the small things in life: having parties and going out with good friends, going for a good nature walk, and enjoying life with others.
-          If you would like to reach out to talk about some of my professional work, or if you just would like to chat about common interests, feel free to contact me at any time!
+          If you would like to reach out to discuss my academic work, or if you just would like to chat about common interests, feel free to contact me at any time!
         </p>
       </div>
     </main>

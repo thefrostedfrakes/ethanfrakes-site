@@ -3,7 +3,7 @@ import {
   SiPython, SiCplusplus, SiC, SiJavascript, SiDart, SiGnubash,
   SiPytorch, SiLangchain, SiOpencv, SiRoboflow, SiNumpy, SiPandas,
   SiHuggingface, SiNvidia, SiReact, SiFlutter, SiAndroidstudio,
-  SiRos, SiLinux, SiDebian, SiCentos, SiUbuntu, SiRedhat,
+  SiRos, SiLinux, SiDebian, SiCentos, SiUbuntu, SiRedhat, SiDocker,
   SiPostgresql, SiMongodb, SiGit, SiGithub, SiArxiv, SiOsf, SiInstagram, 
   SiDiscord, SiLatex, SiOverleaf
 } from 'react-icons/si';
@@ -79,6 +79,7 @@ export default function Portfolio() {
             <li><SiCentos/>CentOS</li>
             <li><SiUbuntu/>Ubuntu</li>
             <li><SiRedhat/>RHEL</li>
+            <li><SiDocker/>Docker</li>
           </ul>
           <h3>Databases:</h3>
           <ul className="skills-list">
@@ -116,13 +117,13 @@ export default function Portfolio() {
             <h3>GeoOutageKG</h3>
             <p><small className="date-range">February 2025 - Present</small></p>
             <p>
-              GeoOutageKG is a multimodal knowledge graph that integrates power outage data sources from multiple databases, namely NASA's Black Marble dataset and the DOE's EAGLE-I dataset.
-              The source datasets contain either nighttime light (NTL) satellite imagery with high spatial resolution but low temporal resolution, or county-wise outage data with frequent temporal updates but low spatial resolution.
-              The data is curated by their spatial and temporal regions and linked together into a geospatiotemporal knowledge graph.
-              The source ontology, GeoOutageOnto, contains 3 novel data classes for numeric outage records, nightly NTL images, and power outage maps calculated using the NTL imagery.
-              GeoOutageKG is a large knowledge graph with over 10.6 million outage record instances, 300,000 NTL image instances, and 190,000 outage map instances.<br/><br/>
+              GeoOutageKG is a multimodal knowledge graph that integrates power outage data sources from multiple databases, namely NASA's Black Marble dataset, the DOE's EAGLE-I dataset, NOAA's Storm Events and HURDAT hurricane databases, and the CDC/ATSDR Social Vulnerability Index.
+              The source datasets contain either nighttime light (NTL) satellite imagery with high spatial resolution but low temporal resolution, or county-wise outage, storm, and vulnerability records with frequent temporal updates but low spatial resolution.
+              The data is curated by their spatial and temporal regions and linked together into a geospatiotemporal knowledge graph, sharing a common county key across all 3,144 U.S. counties and county-equivalents from the Census Bureau's TIGER database.
+              The source ontology, GeoOutageOnto, contains data classes for numeric outage records, nightly NTL images, power outage maps calculated using the NTL imagery, and storm, hurricane, and social vulnerability records, and is aligned with the Materials Data Science Ontology (MDS-Onto).
+              GeoOutageKG is a large knowledge graph with over 11.7 million outage record instances, 2 million storm event instances, 335,000 NTL image instances, and 190,000 outage map instances, totaling over 14.2 million instances and 164 million triples.<br/><br/>
 
-              GeoOutageKG was accepted to and published in the 24th International Semantic Web Conference (ISWC 2025) in Nara, Japan. The citation can be found on the Publications page.<br/><br/>
+              GeoOutageKG 1.0 was previously accepted to and published in the 24th International Semantic Web Conference (ISWC 2025) in Nara, Japan. The citation can be found on the Publications page.<br/><br/>
 
               <SiGithub/><a href="https://purl.org/geooutagekg">GitHub Repository</a>
               <SiOsf/><a href="https://doi.org/10.17605/OSF.IO/QVD8B">OSF Repository</a>
@@ -179,12 +180,12 @@ export default function Portfolio() {
       {experienceOpen && (
         <div className="accordion-content">
           <div className="text-box">
-            <h3>UCF HENAT Lab • Semantic Data &amp; AI Researcher</h3>
+            <h3>UCF SAGE Lab • Semantic Data &amp; AI Researcher</h3>
             <p><small className="date-range">February 2025 - Present</small></p>
             <p>
-              - Researching Ontologies, Knowledge Graphs, AI Reasoning, and Graph Neural Networks (GNNs) for use in power outage detection, analysis, and dataset management with Dr. Mengjie Li.<br/>
-              - Developed GeoOutageKG, a multimodal knowledge graph for geospatiotemporal power outage data and analysis. More info on GeoOutageKG can be found in its project section.<br/>
-              - Currently researching and working on multimodal reasoning agents with RAG-based tool libraries for data integration and interpretation.
+              - Researching Ontologies, Knowledge Graphs, Neuro-symbolic AI, and Multi-agent Systems for use in power outage detection, analysis, and dataset management with Dr. Mengjie Li.<br/>
+              - Developing GeoResilience, a knowledge-graph-powered platform for monitoring, analyzing, and strengthening energy infrastructure resilience. It comprises GeoOutageKG, a multimodal knowledge graph for geospatiotemporal power outage data and analysis, the GeoOutageOnto ontology, and the GeoOutageBench evaluation suite for natural language querying. More info on GeoOutageKG can be found in its project section.<br/>
+              - Currently researching multi-agent systems for energy resilience planning, outage detection and causality, and GIS energy infrastructure data integration.
             </p>
           </div>
           <div className="text-box">
@@ -222,9 +223,17 @@ export default function Portfolio() {
         <div className="accordion-content">
           <div className="text-box">
             <h3>University of Central Florida</h3>
+            <p><small className="date-range">August 2026 - Present</small></p>
+            <p>
+              Modeling and Simulation (Ph.D.)<br/>
+              <small>School of Modeling, Simulation and Training</small>
+            </p>
+          </div>
+          <div className="text-box">
+            <h3>University of Central Florida</h3>
             <p><small className="date-range">August 2021 - December 2024</small></p>
             <p>
-              Major: Computer Science (B.S.) • GPA = 3.7<br/>
+              Computer Science (B.S.) • GPA = 3.7<br/>
               Clubs:<br/>
               <small>AI@UCF • Project Lead, PaletteAI (2023-2024)</small><br/>
               <small>UCF Astronomy Society • Vice President (2023-2024) • Social Media Manager (2022-2023)</small>
@@ -234,7 +243,7 @@ export default function Portfolio() {
             <h3>Lake-Sumter State College</h3>
             <p><small className="date-range">January 2019 - May 2021</small></p>
             <p>
-              Major: General Studies (A.A.) • GPA = 3.8
+              General Studies (A.A.) • GPA = 3.8
             </p>
           </div>
         </div>)}
