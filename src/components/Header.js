@@ -39,7 +39,7 @@ export default function Header() {
         </div>
       </nav>
 
-      <h1>Ethan Frakes</h1>
+      <h1>ETHAN FRAKES</h1>
       <p><small>Welcome to my website!</small></p>
     </header>
   );

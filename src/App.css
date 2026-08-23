@@ -5,10 +5,12 @@ body {
 }
 
 .site-header {
+  /* fade down to the same 0.6 the content uses, so there is no hard seam */
   background: linear-gradient(
     to bottom,
-    rgba(77, 32, 114, 0.6),
-    rgba(0, 0, 0, 0.6)
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 0.6) 100%
   );
   min-height: 55vh;
   display: flex;
@@ -16,10 +18,25 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(15px + 2vmin);
-  color: white;
+  color: var(--orange);
 }
 
-:root { --nav-h: 30px; }
+:root {
+  --nav-h: 30px;
+
+  /* terminal amber: the site-wide text color */
+  --orange: #ff7518;
+  --orange-light: #ff8c1f;
+  --orange-deep: #ff6205;
+  --orange-glow: rgba(255, 98, 5, 0.5);
+
+  /* phosphor green: the content boxes, inside and out */
+  --green: #4ade80;
+  --green-light: #bbf7d0;
+  --green-deep: #22c55e;
+  --green-dim: #6b8f76;
+  --green-code: #a5e8b4;
+}
 
 /* fixed top bar you already have */
 .site-nav {
@@ -57,10 +74,12 @@ body {
 
 /* links look */
 .site-nav__links a {
-  color: #fff;
+  color: var(--orange);
   text-decoration: none;
   font-weight: 700;
   padding: 0 .75rem;
+  font-size: 0.85em;
+  text-transform: uppercase;
 }
 .site-nav__links a:hover { text-decoration: underline; }
 
@@ -122,13 +141,31 @@ body {
 /* matrix should stay behind */
 canvas { position: fixed; inset: 0; z-index: 0; }
 
+/* faint sheen of light reflecting off the screen glass; sits above the page
+   content but never intercepts clicks, and stays put while the page scrolls */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    75% 60% at 40% 32%,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.032) 60%,
+    rgba(255, 255, 255, 0.012) 78%,
+    rgba(255, 255, 255, 0) 92%
+  );
+}
+
 .site-header h1,
 .site-header nav a {
   color: transparent;
   background: linear-gradient(
     to bottom,
-    #ffffff,
-    #ffe2e7
+    var(--orange-light),
+    var(--orange-deep)
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -150,7 +187,7 @@ canvas { position: fixed; inset: 0; z-index: 0; }
   padding: 1rem 0;
   padding-bottom: 10rem;
   background-color: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: var(--orange);
   text-align: center;
   font-size: 1.5rem;
 }
@@ -159,7 +196,13 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .site-content h1,
 .site-content h2 {
   text-shadow:
-    0 0 10px rgba(255, 224, 231, 0.5);
+    0 0 10px var(--orange-glow);
+}
+
+/* page titles and the dropdown headings read as uppercase labels */
+.site-content h1,
+.site-content h2 {
+  text-transform: uppercase;
 }
 
 .site-content h1, 
@@ -169,8 +212,8 @@ canvas { position: fixed; inset: 0; z-index: 0; }
   color: transparent;
   background-image: linear-gradient(
     to bottom,
-    #ffffff,
-    #ffbec5
+    var(--orange-light),
+    var(--orange-deep)
   );
   background-repeat: repeat;
   background-size: 100% 1.6em;
@@ -194,21 +237,54 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 }
 
 .site-content svg {
-  color: #ffe2e7;
+  color: var(--orange);
   font-size: 2rem;          
   margin-right: 0.5rem;     
 }
 
 .site-content a {
-  color: #ffe2e7;
+  color: var(--orange);
   text-decoration: none;
   font-weight: bold;
+}
+
+/* The content boxes run green against the site's orange. These selectors match
+   the .site-content ones above at equal specificity, so they must stay below
+   them in the file to win. */
+.text-box,
+.publication-box {
+  color: var(--green);
+}
+
+.text-box h1,
+.text-box h2,
+.text-box h3,
+.text-box p,
+.publication-box h1,
+.publication-box h2,
+.publication-box h3,
+.publication-box p {
+  background-image: linear-gradient(
+    to bottom,
+    var(--green-light),
+    var(--green-deep)
+  );
+}
+
+.text-box a,
+.publication-box a {
+  color: var(--green);
+}
+
+.text-box svg,
+.publication-box svg {
+  color: var(--green);
 }
 
 .date-range {
   display: block;
   font-size: clamp(0.75rem, 2vw, 0.875rem);
-  color: #888;
+  color: var(--green-dim);
   font-style: normal;
   line-height: 0.001; 
   margin-left: -2rem;
@@ -217,12 +293,12 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .text-box {
   width: 75%;
   margin: 1.5rem auto;
-  border: 1px solid #ccc;
+  border: 6px solid var(--green);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
-  font-family: 'Jost', Helvetica, sans-serif;
+  font-family: 'Inter', 'Jost', Helvetica, sans-serif;
 }
 
 .text-box h3,
@@ -251,18 +327,18 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .text-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
-  color: white;
+  color: var(--green);
 }
 
 .publication-box {
   width: 75%;
   margin: 2rem auto;
-  border: 1px solid #ccc;
+  border: 2px solid var(--green);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
-  font-family: 'Jost', Helvetica, sans-serif;
+  font-family: 'Inter', 'Jost', Helvetica, sans-serif;
 }
 
 .publication-box h3,
@@ -286,12 +362,12 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .publication-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
-  color: white;
+  color: var(--green);
 }
 
 .bibtex-block {
   background: #1e1e1e;
-  color: #dcdcdc;
+  color: var(--green-code);
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   line-height: 1.4;
@@ -325,13 +401,13 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 
 .site-footer {
   background: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: var(--orange);
   text-align: center;
   padding: 1rem;
 }
 
 .site-footer a {
-  color: #ffe2e7;
+  color: var(--orange);
   text-decoration: none;
   font-weight: bold;
 }
@@ -373,6 +449,22 @@ canvas {
   font-display: swap;
 }
 
+
+@font-face {
+  font-family: 'ShareTechMono';
+  src: url('./fonts/ShareTechMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter_18pt-Medium.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Jost';
