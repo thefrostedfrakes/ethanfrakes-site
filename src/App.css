@@ -7,8 +7,9 @@ body {
 .site-header {
   background: linear-gradient(
     to bottom,
-    rgba(77, 32, 114, 0.6),
-    rgba(0, 0, 0, 0.6)
+    rgba(27, 47, 45, 0.85) 0%,
+    rgba(16, 28, 27, 0.8) 45%,
+    rgba(0, 0, 0, 0.6) 100%
   );
   min-height: 55vh;
   display: flex;
@@ -16,10 +17,24 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(15px + 2vmin);
-  color: white;
+  color: var(--orange);
 }
 
-:root { --nav-h: 30px; }
+:root {
+  --nav-h: 30px;
+
+  /* terminal amber: the site-wide text color */
+  --orange: #ff7518;
+  --orange-light: #ff8c1f;
+  --orange-deep: #ff6205;
+  --orange-glow: rgba(255, 98, 5, 0.5);
+
+  --cyan: #00eeee;
+  --cyan-light: #8fd8d8;
+  --cyan-deep: #00eeee;
+  --cyan-dim: #6fc0ba;
+  --cyan-code: #8fd8d8;
+}
 
 /* fixed top bar you already have */
 .site-nav {
@@ -46,21 +61,34 @@ body {
   margin-right: auto;   /* push links to center while logo stays left */
   margin-left: 0vw;     /* keep the 5vw padding from left */
   text-decoration: none;
+  /* the bar takes its height from this, the tallest thing in it, so the mark
+     used to run edge to edge. 1vmin of air above and below lifts it off both
+     edges while the bar stays the 7vmin it already was. */
+  padding: 1vmin 0;
 }
 
-/* style the image inside */
+/* style the mark inside. The artwork is white on transparent, so it is used as
+   an alpha mask over a solid fill rather than painted straight: the mark reads
+   as --orange, the same color as the nav links, and follows that variable if
+   the site's color ever moves again. */
 .site-logo-link .site-logo {
-  height: 7vmin;
-  pointer-events: none;
   display: block;       /* remove extra inline spacing */
+  width: 5vmin;
+  height: 5vmin;        /* the mark is square - 600x600 */
+  pointer-events: none;
+  background-color: var(--orange);
+  -webkit-mask: url('./images/logo.png') center / contain no-repeat;
+  mask: url('./images/logo.png') center / contain no-repeat;
 }
 
 /* links look */
 .site-nav__links a {
-  color: #fff;
+  color: var(--orange);
   text-decoration: none;
   font-weight: 700;
   padding: 0 .75rem;
+  font-size: 0.85em;
+  text-transform: uppercase;
 }
 .site-nav__links a:hover { text-decoration: underline; }
 
@@ -122,16 +150,78 @@ body {
 /* matrix should stay behind */
 canvas { position: fixed; inset: 0; z-index: 0; }
 
+/* the fluorescent tubes overhead, caught in the screen glass. Sits above the
+   page content, never intercepts clicks, and stays put while the page scrolls.
+   Screen blending is how reflected light actually behaves: it only ever adds
+   light to what is behind it, so the text under a streak brightens rather than
+   going muddy. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url('./images/LightReflection.png');
+  background-repeat: no-repeat;
+
+  /* sized off the larger viewport edge rather than the width: on a tall phone
+     a width-relative strip collapses into a sliver, while vmax keeps the
+     streaks the same visual weight there as on a desktop - running off the
+     side edges, the way ceiling tubes do. Clamped so it stays sane on very
+     small screens and very wide ones alike. */
+  background-size: clamp(320px, 80vmax, 1600px) auto;
+
+  /* the streaks sit in the middle of the art, so a percentage is what holds
+     them at a steady height: it measures the room left over around the image,
+     which shrinks as the image grows. A px or vh offset cannot do that - it
+     drags the strip off the top of the screen on a phone, where the image is
+     only a couple hundred pixels tall. Percentages also resolve against this
+     fixed box rather than the viewport, which sidesteps the mobile
+     browser-chrome problem vh units have. */
+  background-position: center 10%;
+
+  mix-blend-mode: screen;
+  opacity: 0.22;
+}
+
+
 .site-header h1,
 .site-header nav a {
   color: transparent;
   background: linear-gradient(
     to bottom,
-    #ffffff,
-    #ffe2e7
+    var(--orange-light),
+    var(--orange-deep)
   );
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* a strip of the name is cut clean away, like the band of glare that wipes
+   out part of the text on a CRT with the room lights behind it. Nothing is
+   painted over the letters: the stripe is masked out of the h1, so glyph fill
+   and the inherited glow alike are gone inside it and the background shows
+   straight through.
+
+   50% is the middle of the capitals: the line box is centered on the text, and
+   Orbitron's cap height matches its ascent minus its descent. So the band is
+   placed as a drop below that middle - raise --strike-drop toward 0.35em to
+   slide it down to the baseline, or zero it to center it. */
+.site-header h1 {
+  --strike-drop: 0.12em;
+  --strike-thickness: 0.11em;
+  --strike-center: calc(50% + var(--strike-drop));
+  --strike-top: calc(var(--strike-center) - var(--strike-thickness) / 2);
+  --strike-bottom: calc(var(--strike-center) + var(--strike-thickness) / 2);
+  --strike-mask: linear-gradient(
+    to bottom,
+    #000 var(--strike-top),
+    transparent var(--strike-top),
+    transparent var(--strike-bottom),
+    #000 var(--strike-bottom)
+  );
+  -webkit-mask-image: var(--strike-mask);
+  mask-image: var(--strike-mask);
 }
 
 .accordion-header {
@@ -150,7 +240,7 @@ canvas { position: fixed; inset: 0; z-index: 0; }
   padding: 1rem 0;
   padding-bottom: 10rem;
   background-color: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: var(--orange);
   text-align: center;
   font-size: 1.5rem;
 }
@@ -159,7 +249,13 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .site-content h1,
 .site-content h2 {
   text-shadow:
-    0 0 10px rgba(255, 224, 231, 0.5);
+    0 0 10px var(--orange-glow);
+}
+
+/* page titles and the dropdown headings read as uppercase labels */
+.site-content h1,
+.site-content h2 {
+  text-transform: uppercase;
 }
 
 .site-content h1, 
@@ -169,8 +265,8 @@ canvas { position: fixed; inset: 0; z-index: 0; }
   color: transparent;
   background-image: linear-gradient(
     to bottom,
-    #ffffff,
-    #ffbec5
+    var(--orange-light),
+    var(--orange-deep)
   );
   background-repeat: repeat;
   background-size: 100% 1.6em;
@@ -194,21 +290,51 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 }
 
 .site-content svg {
-  color: #ffe2e7;
+  color: var(--orange);
   font-size: 2rem;          
   margin-right: 0.5rem;     
 }
 
 .site-content a {
-  color: #ffe2e7;
+  color: var(--orange);
   text-decoration: none;
   font-weight: bold;
+}
+
+.text-box,
+.publication-box {
+  color: var(--cyan);
+}
+
+.text-box h1,
+.text-box h2,
+.text-box h3,
+.text-box p,
+.publication-box h1,
+.publication-box h2,
+.publication-box h3,
+.publication-box p {
+  background-image: linear-gradient(
+    to bottom,
+    var(--cyan-light),
+    var(--cyan-deep)
+  );
+}
+
+.text-box a,
+.publication-box a {
+  color: var(--cyan);
+}
+
+.text-box svg,
+.publication-box svg {
+  color: var(--cyan);
 }
 
 .date-range {
   display: block;
   font-size: clamp(0.75rem, 2vw, 0.875rem);
-  color: #888;
+  color: var(--cyan-dim);
   font-style: normal;
   line-height: 0.001; 
   margin-left: -2rem;
@@ -217,12 +343,27 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .text-box {
   width: 75%;
   margin: 1.5rem auto;
-  border: 1px solid #ccc;
+  position: relative;          /* the second rule below is placed against this */
+  border: 2px solid var(--cyan);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
-  font-family: 'Jost', Helvetica, sans-serif;
+  font-family: 'Inconsolata', 'Inter', 'Jost', Helvetica, sans-serif;
+}
+
+/* a second rule inside the first, the way the boardroom frames its panels.
+   The inset is measured from the padding box, so the 4px of black between the
+   two lines is the same down every side and around the corners. The radius is
+   the outer 10px less the 2px border and the 4px inset, which keeps the two
+   curves concentric instead of leaving the inner corner looking pinched. */
+.text-box::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 2px solid var(--cyan);
+  border-radius: 4px;
+  pointer-events: none;        /* these boxes hold links - do not eat clicks */
 }
 
 .text-box h3,
@@ -251,18 +392,18 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .text-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
-  color: white;
+  color: var(--cyan);
 }
 
 .publication-box {
   width: 75%;
   margin: 2rem auto;
-  border: 1px solid #ccc;
+  border: 2px solid var(--cyan);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
-  font-family: 'Jost', Helvetica, sans-serif;
+  font-family: 'Inconsolata', 'Inter', 'Jost', Helvetica, sans-serif;
 }
 
 .publication-box h3,
@@ -286,12 +427,12 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 .publication-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
-  color: white;
+  color: var(--cyan);
 }
 
 .bibtex-block {
   background: #1e1e1e;
-  color: #dcdcdc;
+  color: var(--cyan-code);
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   line-height: 1.4;
@@ -325,13 +466,13 @@ canvas { position: fixed; inset: 0; z-index: 0; }
 
 .site-footer {
   background: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: var(--orange);
   text-align: center;
   padding: 1rem;
 }
 
 .site-footer a {
-  color: #ffe2e7;
+  color: var(--orange);
   text-decoration: none;
   font-weight: bold;
 }
@@ -375,6 +516,22 @@ canvas {
 
 
 @font-face {
+  font-family: 'ShareTechMono';
+  src: url('./fonts/ShareTechMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter_18pt-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Jost';
   src: url('./fonts/Jost-Medium.woff2') format('woff2');
   font-weight: 400;
@@ -394,6 +551,14 @@ canvas {
   font-family: 'Hina Mincho';
   src: url('./fonts/HinaMincho-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('./fonts/Inconsolata-VariableFont_wdth,wght.woff2') format('woff2');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
