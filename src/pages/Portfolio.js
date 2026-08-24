@@ -227,10 +227,7 @@ export default function Portfolio() {
             <p>
               Modeling and Simulation (Ph.D.)<br/>
               <small>School of Modeling, Simulation and Training</small>
-            </p>
-          </div>
-          <div className="text-box">
-            <h3>University of Central Florida</h3>
+            </p><br/>
             <p><small className="date-range">August 2021 - December 2024</small></p>
             <p>
               Computer Science (B.S.) • GPA = 3.7<br/>

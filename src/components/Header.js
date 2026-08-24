@@ -1,7 +1,7 @@
 // Header.js
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../logo.png';
+import logo from '../images/logo.png';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -40,7 +40,7 @@ export default function Header() {
       </nav>
 
       <h1>ETHAN FRAKES</h1>
-      <p><small>Welcome to my website!</small></p>
+      <p><small>WELCOME</small></p>
     </header>
   );
 }

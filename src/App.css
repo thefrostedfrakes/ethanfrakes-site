@@ -5,11 +5,15 @@ body {
 }
 
 .site-header {
-  /* fade down to the same 0.6 the content uses, so there is no hard seam */
+  /* wash of phosphor green pouring down from the top of the screen, the way
+     the old build did it in purple. #1f6f3d is the site's green taken down to
+     a shade; the middle stop is that color at 60%, which keeps the color ramp
+     linear while the alpha ramp stays as it was - fading down to the same 0.6
+     the content uses, so there is no hard seam. */
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.8) 40%,
+    rgba(18, 63, 35, 0.85) 0%,
+    rgba(9, 31, 17, 0.8) 45%,
     rgba(0, 0, 0, 0.6) 100%
   );
   min-height: 55vh;
@@ -141,23 +145,40 @@ body {
 /* matrix should stay behind */
 canvas { position: fixed; inset: 0; z-index: 0; }
 
-/* faint sheen of light reflecting off the screen glass; sits above the page
-   content but never intercepts clicks, and stays put while the page scrolls */
+/* the fluorescent tubes overhead, caught in the screen glass. Sits above the
+   page content, never intercepts clicks, and stays put while the page scrolls.
+   Screen blending is how reflected light actually behaves: it only ever adds
+   light to what is behind it, so the text under a streak brightens rather than
+   going muddy. */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(
-    75% 60% at 40% 32%,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.08) 35%,
-    rgba(255, 255, 255, 0.032) 60%,
-    rgba(255, 255, 255, 0.012) 78%,
-    rgba(255, 255, 255, 0) 92%
-  );
+  background-image: url('./images/LightReflection.png');
+  background-repeat: no-repeat;
+
+  /* sized off the larger viewport edge rather than the width: on a tall phone
+     a width-relative strip collapses into a sliver, while vmax keeps the
+     streaks the same visual weight there as on a desktop - running off the
+     side edges, the way ceiling tubes do. Clamped so it stays sane on very
+     small screens and very wide ones alike. */
+  background-size: clamp(320px, 80vmax, 1600px) auto;
+
+  /* the streaks sit in the middle of the art, so a percentage is what holds
+     them at a steady height: it measures the room left over around the image,
+     which shrinks as the image grows. A px or vh offset cannot do that - it
+     drags the strip off the top of the screen on a phone, where the image is
+     only a couple hundred pixels tall. Percentages also resolve against this
+     fixed box rather than the viewport, which sidesteps the mobile
+     browser-chrome problem vh units have. */
+  background-position: center 10%;
+
+  mix-blend-mode: screen;
+  opacity: 0.22;
 }
+
 
 .site-header h1,
 .site-header nav a {
@@ -169,6 +190,33 @@ body::after {
   );
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* a strip of the name is cut clean away, like the band of glare that wipes
+   out part of the text on a CRT with the room lights behind it. Nothing is
+   painted over the letters: the stripe is masked out of the h1, so glyph fill
+   and the inherited glow alike are gone inside it and the background shows
+   straight through.
+
+   50% is the middle of the capitals: the line box is centered on the text, and
+   Orbitron's cap height matches its ascent minus its descent. So the band is
+   placed as a drop below that middle - raise --strike-drop toward 0.35em to
+   slide it down to the baseline, or zero it to center it. */
+.site-header h1 {
+  --strike-drop: 0.12em;
+  --strike-thickness: 0.11em;
+  --strike-center: calc(50% + var(--strike-drop));
+  --strike-top: calc(var(--strike-center) - var(--strike-thickness) / 2);
+  --strike-bottom: calc(var(--strike-center) + var(--strike-thickness) / 2);
+  --strike-mask: linear-gradient(
+    to bottom,
+    #000 var(--strike-top),
+    transparent var(--strike-top),
+    transparent var(--strike-bottom),
+    #000 var(--strike-bottom)
+  );
+  -webkit-mask-image: var(--strike-mask);
+  mask-image: var(--strike-mask);
 }
 
 .accordion-header {
@@ -461,7 +509,7 @@ canvas {
 @font-face {
   font-family: 'Inter';
   src: url('./fonts/Inter_18pt-Medium.woff2') format('woff2');
-  font-weight: 800;
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
