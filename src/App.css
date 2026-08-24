@@ -208,6 +208,9 @@ body::after {
    placed as a drop below that middle - raise --strike-drop toward 0.35em to
    slide it down to the baseline, or zero it to center it. */
 .site-header h1 {
+  font-size: min(9.5vw, calc(30px + 4vmin));
+  white-space: nowrap;
+
   --strike-drop: 0.12em;
   --strike-thickness: 0.11em;
   --strike-center: calc(50% + var(--strike-drop));
@@ -273,7 +276,15 @@ body::after {
   -webkit-background-clip: text;
   background-clip: text;
   background-position: 0 0;
+  overflow-wrap: break-word;
+}
+
+.site-content p {
   overflow-wrap: anywhere;
+}
+
+.site-content h1 {
+  font-size: min(10vw, 3rem);
 }
 
 .site-content section > h2 {
@@ -357,13 +368,15 @@ body::after {
    two lines is the same down every side and around the corners. The radius is
    the outer 10px less the 2px border and the 4px inset, which keeps the two
    curves concentric instead of leaving the inner corner looking pinched. */
-.text-box::before {
+.text-box::before,
+.publication-box::before {
   content: "";
   position: absolute;
   inset: 4px;
   border: 2px solid var(--cyan);
   border-radius: 4px;
-  pointer-events: none;        /* these boxes hold links - do not eat clicks */
+  pointer-events: none;        /* these boxes hold links and the bibtex copy
+                                  button - do not eat their clicks */
 }
 
 .text-box h3,
@@ -398,6 +411,7 @@ body::after {
 .publication-box {
   width: 75%;
   margin: 2rem auto;
+  position: relative;          /* the second rule above is placed against this */
   border: 2px solid var(--cyan);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
