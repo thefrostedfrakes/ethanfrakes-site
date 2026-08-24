@@ -5,15 +5,10 @@ body {
 }
 
 .site-header {
-  /* wash of phosphor green pouring down from the top of the screen, the way
-     the old build did it in purple. #1f6f3d is the site's green taken down to
-     a shade; the middle stop is that color at 60%, which keeps the color ramp
-     linear while the alpha ramp stays as it was - fading down to the same 0.6
-     the content uses, so there is no hard seam. */
   background: linear-gradient(
     to bottom,
-    rgba(18, 63, 35, 0.85) 0%,
-    rgba(9, 31, 17, 0.8) 45%,
+    rgba(27, 47, 45, 0.85) 0%,
+    rgba(16, 28, 27, 0.8) 45%,
     rgba(0, 0, 0, 0.6) 100%
   );
   min-height: 55vh;
@@ -34,12 +29,11 @@ body {
   --orange-deep: #ff6205;
   --orange-glow: rgba(255, 98, 5, 0.5);
 
-  /* phosphor green: the content boxes, inside and out */
-  --green: #4ade80;
-  --green-light: #bbf7d0;
-  --green-deep: #22c55e;
-  --green-dim: #6b8f76;
-  --green-code: #a5e8b4;
+  --cyan: #00eeee;
+  --cyan-light: #8fd8d8;
+  --cyan-deep: #00eeee;
+  --cyan-dim: #6fc0ba;
+  --cyan-code: #8fd8d8;
 }
 
 /* fixed top bar you already have */
@@ -67,13 +61,24 @@ body {
   margin-right: auto;   /* push links to center while logo stays left */
   margin-left: 0vw;     /* keep the 5vw padding from left */
   text-decoration: none;
+  /* the bar takes its height from this, the tallest thing in it, so the mark
+     used to run edge to edge. 1vmin of air above and below lifts it off both
+     edges while the bar stays the 7vmin it already was. */
+  padding: 1vmin 0;
 }
 
-/* style the image inside */
+/* style the mark inside. The artwork is white on transparent, so it is used as
+   an alpha mask over a solid fill rather than painted straight: the mark reads
+   as --orange, the same color as the nav links, and follows that variable if
+   the site's color ever moves again. */
 .site-logo-link .site-logo {
-  height: 7vmin;
-  pointer-events: none;
   display: block;       /* remove extra inline spacing */
+  width: 5vmin;
+  height: 5vmin;        /* the mark is square - 600x600 */
+  pointer-events: none;
+  background-color: var(--orange);
+  -webkit-mask: url('./images/logo.png') center / contain no-repeat;
+  mask: url('./images/logo.png') center / contain no-repeat;
 }
 
 /* links look */
@@ -296,12 +301,9 @@ body::after {
   font-weight: bold;
 }
 
-/* The content boxes run green against the site's orange. These selectors match
-   the .site-content ones above at equal specificity, so they must stay below
-   them in the file to win. */
 .text-box,
 .publication-box {
-  color: var(--green);
+  color: var(--cyan);
 }
 
 .text-box h1,
@@ -314,25 +316,25 @@ body::after {
 .publication-box p {
   background-image: linear-gradient(
     to bottom,
-    var(--green-light),
-    var(--green-deep)
+    var(--cyan-light),
+    var(--cyan-deep)
   );
 }
 
 .text-box a,
 .publication-box a {
-  color: var(--green);
+  color: var(--cyan);
 }
 
 .text-box svg,
 .publication-box svg {
-  color: var(--green);
+  color: var(--cyan);
 }
 
 .date-range {
   display: block;
   font-size: clamp(0.75rem, 2vw, 0.875rem);
-  color: var(--green-dim);
+  color: var(--cyan-dim);
   font-style: normal;
   line-height: 0.001; 
   margin-left: -2rem;
@@ -341,12 +343,27 @@ body::after {
 .text-box {
   width: 75%;
   margin: 1.5rem auto;
-  border: 6px solid var(--green);
+  position: relative;          /* the second rule below is placed against this */
+  border: 2px solid var(--cyan);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
-  font-family: 'Inter', 'Jost', Helvetica, sans-serif;
+  font-family: 'Inconsolata', 'Inter', 'Jost', Helvetica, sans-serif;
+}
+
+/* a second rule inside the first, the way the boardroom frames its panels.
+   The inset is measured from the padding box, so the 4px of black between the
+   two lines is the same down every side and around the corners. The radius is
+   the outer 10px less the 2px border and the 4px inset, which keeps the two
+   curves concentric instead of leaving the inner corner looking pinched. */
+.text-box::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 2px solid var(--cyan);
+  border-radius: 4px;
+  pointer-events: none;        /* these boxes hold links - do not eat clicks */
 }
 
 .text-box h3,
@@ -375,18 +392,18 @@ body::after {
 .text-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
-  color: var(--green);
+  color: var(--cyan);
 }
 
 .publication-box {
   width: 75%;
   margin: 2rem auto;
-  border: 2px solid var(--green);
+  border: 2px solid var(--cyan);
   border-radius: 10px;
   padding: 0.5rem;             /* inner spacing */
   background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* subtle shadow */
-  font-family: 'Inter', 'Jost', Helvetica, sans-serif;
+  font-family: 'Inconsolata', 'Inter', 'Jost', Helvetica, sans-serif;
 }
 
 .publication-box h3,
@@ -410,12 +427,12 @@ body::after {
 .publication-box p svg {
   margin-right: 0.4rem;
   vertical-align: middle;
-  color: var(--green);
+  color: var(--cyan);
 }
 
 .bibtex-block {
   background: #1e1e1e;
-  color: var(--green-code);
+  color: var(--cyan-code);
   font-family: 'Courier New', monospace;
   font-size: 1rem;
   line-height: 1.4;
@@ -534,6 +551,14 @@ canvas {
   font-family: 'Hina Mincho';
   src: url('./fonts/HinaMincho-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('./fonts/Inconsolata-VariableFont_wdth,wght.woff2') format('woff2');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }

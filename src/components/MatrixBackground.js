@@ -95,7 +95,7 @@ export default function MatrixBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const color = [0, 255, 0]; // change to any RGB
+    const color = [0, 238, 238]; // #00eeee, the Encom boardroom cyan
     const charRanges = [
       [0x0030, 0x0039],  // Digits
       [0x0041, 0x005A],  // Alphabet

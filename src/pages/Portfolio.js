@@ -11,7 +11,7 @@ import { FaJava, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { TiHtml5 } from "react-icons/ti";
 import { DiW3C, DiScrum } from "react-icons/di";
 import { MdViewKanban } from "react-icons/md";
-import { TbSql } from "react-icons/tb";
+import { TbSql, TbWorldBolt } from "react-icons/tb";
 
 export default function Portfolio() {
   const [skillsOpen, setSkillsOpen] = useState(false);
@@ -125,6 +125,7 @@ export default function Portfolio() {
 
               GeoOutageKG 1.0 was previously accepted to and published in the 24th International Semantic Web Conference (ISWC 2025) in Nara, Japan. The citation can be found on the Publications page.<br/><br/>
 
+              <TbWorldBolt/><a href="https://geo-resilience.com/">GeoResilience Sandbox</a>
               <SiGithub/><a href="https://purl.org/geooutagekg">GitHub Repository</a>
               <SiOsf/><a href="https://doi.org/10.17605/OSF.IO/QVD8B">OSF Repository</a>
               <SiArxiv/><a href="https://doi.org/10.48550/arXiv.2507.22878">arXiv Preprint</a>
