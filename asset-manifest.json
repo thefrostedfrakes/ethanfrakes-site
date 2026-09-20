@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.970c2f98.css",
-    "main.js": "/static/js/main.8d8abc22.js",
+    "main.css": "/static/css/main.44641a2f.css",
+    "main.js": "/static/js/main.4e14b216.js",
     "static/js/453.ee5807c3.chunk.js": "/static/js/453.ee5807c3.chunk.js",
     "static/media/HinaMincho-Regular.woff2": "/static/media/HinaMincho-Regular.a6d40cbb62d48f595a61.woff2",
     "static/media/LightReflection.png": "/static/media/LightReflection.798e16ed5c443d34ec08.png",
@@ -13,12 +13,12 @@
     "static/media/ShareTechMono-Regular.woff2": "/static/media/ShareTechMono-Regular.227d6dfb4e8089bfe7dd.woff2",
     "static/media/Orbitron-Medium.woff2": "/static/media/Orbitron-Medium.e53220cd49b5311e00b6.woff2",
     "index.html": "/index.html",
-    "main.970c2f98.css.map": "/static/css/main.970c2f98.css.map",
-    "main.8d8abc22.js.map": "/static/js/main.8d8abc22.js.map",
+    "main.44641a2f.css.map": "/static/css/main.44641a2f.css.map",
+    "main.4e14b216.js.map": "/static/js/main.4e14b216.js.map",
     "453.ee5807c3.chunk.js.map": "/static/js/453.ee5807c3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.970c2f98.css",
-    "static/js/main.8d8abc22.js"
+    "static/css/main.44641a2f.css",
+    "static/js/main.4e14b216.js"
   ]
 }
