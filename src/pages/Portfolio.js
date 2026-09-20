@@ -181,7 +181,7 @@ export default function Portfolio() {
       {experienceOpen && (
         <div className="accordion-content">
           <div className="text-box">
-            <h3>UCF SAGE Lab • Semantic Data &amp; AI Researcher</h3>
+            <h3>UCF SAGE Lab • Neuro-symbolic AI Researcher</h3>
             <p><small className="date-range">February 2025 - Present</small></p>
             <p>
               - Researching Ontologies, Knowledge Graphs, Neuro-symbolic AI, and Multi-agent Systems for use in power outage detection, analysis, and dataset management with Dr. Mengjie Li.<br/>

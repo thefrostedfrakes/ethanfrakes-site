@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FiCopy } from 'react-icons/fi';
 
 export default function Publications() {
@@ -29,19 +29,41 @@ export default function Publications() {
   organization={SPIE},
 }`
 
-  const copyBibtexGOKG = () => {
-    navigator.clipboard.writeText(bibtex_gokg).then(
-      () => alert('BibTeX copied to clipboard!'),
-      () => alert('Failed to copy')
+  const BUBBLE_MS = 2000;      /* how long the bubble stays up */
+
+  /* which entry's bubble is showing, and the timer that takes it back down.
+     Copying again restarts that timer rather than letting the earlier one pull
+     the newer bubble down early. */
+  const [bubble, setBubble] = useState(null);   // { key, message }
+  const hideTimer = useRef(null);
+
+  useEffect(() => () => clearTimeout(hideTimer.current), []);
+
+  const copyBibtex = (key, text) => {
+    const flash = (message) => {
+      clearTimeout(hideTimer.current);
+      setBubble({ key, message });
+      hideTimer.current = setTimeout(() => setBubble(null), BUBBLE_MS);
+    };
+
+    navigator.clipboard.writeText(text).then(
+      () => flash('Copied!'),
+      () => flash('Copy failed')
     );
   };
 
-  const copyBibtexSPIE = () => {
-    navigator.clipboard.writeText(bibtex_spie).then(
-      () => alert('BibTeX copied to clipboard!'),
-      () => alert('Failed to copy')
-    );
-  };
+  /* The bubble rides inside the button so it can sit directly above the icon.
+     It stays mounted and empty while idle so a screen reader has a live region
+     already in the page to announce the message into - the alert() this
+     replaced used to speak for itself. */
+  const bubbleFor = (key) => (
+    <span
+      className={`copy-bubble${bubble?.key === key ? ' is-visible' : ''}`}
+      role="status"
+    >
+      {bubble?.key === key ? bubble.message : ''}
+    </span>
+  );
 
   return (
     <main className="site-content">
@@ -62,8 +84,9 @@ export default function Publications() {
         </p>
 
         <div className="bibtex-wrapper">
-          <button onClick={copyBibtexGOKG} className="bibtex-button" aria-label="Copy BibTeX">
+          <button onClick={() => copyBibtex('gokg', bibtex_gokg)} className="bibtex-button" aria-label="Copy BibTeX">
             <FiCopy className="copy-icon"/>
+            {bubbleFor('gokg')}
           </button>
             <pre className="bibtex-block">
               <code>{bibtex_gokg}</code>
@@ -86,8 +109,9 @@ export default function Publications() {
         </p>
 
         <div className="bibtex-wrapper">
-          <button onClick={copyBibtexSPIE} className="bibtex-button" aria-label="Copy BibTeX">
+          <button onClick={() => copyBibtex('spie', bibtex_spie)} className="bibtex-button" aria-label="Copy BibTeX">
             <FiCopy className="copy-icon"/>
+            {bubbleFor('spie')}
           </button>
             <pre className="bibtex-block">
               <code>{bibtex_spie}</code>

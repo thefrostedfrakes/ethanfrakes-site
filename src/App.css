@@ -77,8 +77,8 @@ body {
   height: 5vmin;        /* the mark is square - 600x600 */
   pointer-events: none;
   background-color: var(--orange);
-  -webkit-mask: url('./images/logo.png') center / contain no-repeat;
-  mask: url('./images/logo.png') center / contain no-repeat;
+  -webkit-mask: url('./images/logo.svg') center / contain no-repeat;
+  mask: url('./images/logo.svg') center / contain no-repeat;
 }
 
 /* links look */
@@ -476,6 +476,53 @@ body::after {
 
 .bibtex-button .copy-icon {
   position: absolute;
+}
+
+/* the "Copied!" bubble. Its button is a zero-size box with the icon positioned
+   out of it, so the bubble hangs off that corner and is nudged half an icon
+   (the mark renders at 1em) to center over the mark itself. */
+.copy-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 0.5em;
+  transform: translateX(-50%);
+  margin-bottom: 0.6rem;
+  z-index: 5;
+  padding: 0.25rem 0.6rem;
+  background: #1e1e1e;
+  color: var(--cyan-code);
+  border: 1px solid var(--cyan);
+  border-radius: 4px;
+  font-family: 'Inconsolata', 'Inter', 'Jost', Helvetica, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;        /* never let it eat a click meant for the button */
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.copy-bubble.is-visible {
+  opacity: 1;
+}
+
+/* the tail, drawn twice: the cyan triangle is the border, the dark one sits a
+   pixel over it as the fill, so the tail matches the bubble's own edge. */
+.copy-bubble::after,
+.copy-bubble::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+}
+
+.copy-bubble::after  { border-top-color: var(--cyan); }
+.copy-bubble::before { border-top-color: #1e1e1e; margin-top: -1px; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-bubble { transition: none; }
 }
 
 .site-footer {
