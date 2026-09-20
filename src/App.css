@@ -11,11 +11,21 @@ body {
     rgba(16, 28, 27, 0.8) 45%,
     rgba(0, 0, 0, 0.6) 100%
   );
-  min-height: 55vh;
+  /* The hero used to be a 55vh box with its contents centred, which meant the
+     gap under WELCOME was whatever height happened to be left over - more than
+     half the box on a tall window. Anchoring the contents to the top instead
+     makes both gaps things you set rather than things you get: --hero-top is
+     the drop from the bar to the name, --hero-bottom the space under WELCOME.
+     The min-height is now only a floor, so the hero keeps some presence on a
+     short window without dictating the spacing on a tall one. */
+  --hero-top: 9vh;
+  --hero-bottom: 6vh;
+
+  min-height: 24vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(15px + 2vmin);
   color: var(--orange);
 }
@@ -34,6 +44,7 @@ body {
   --cyan-deep: #00eeee;
   --cyan-dim: #6fc0ba;
   --cyan-code: #8fd8d8;
+  --cyan-glow: rgba(0, 238, 238, 0.5);
 }
 
 /* fixed top bar you already have */
@@ -145,7 +156,17 @@ body {
 }
 
 /* keep header pushed below fixed bar */
-.site-header { padding-top: calc(var(--nav-h) + env(safe-area-inset-top) + .5rem); }
+.site-header {
+  padding-top: calc(var(--nav-h) + env(safe-area-inset-top) + var(--hero-top));
+  padding-bottom: var(--hero-bottom);
+}
+
+/* The gap under WELCOME was three separate numbers quietly adding up: the
+   leftover of the hero's centring, this paragraph's own bottom margin, and the
+   page title's top margin. With the first gone and these two zeroed, the gap is
+   --hero-bottom plus the content's 1rem of padding - one number to turn. */
+.site-header > p:last-child { margin-bottom: 0; }
+.site-content > h1:first-child { margin-top: 0; }
 
 /* matrix should stay behind */
 canvas { position: fixed; inset: 0; z-index: 0; }
@@ -530,6 +551,15 @@ body::after {
   color: var(--orange);
   text-align: center;
   padding: 1rem;
+
+  /* The footer is the last thing in the document, so the frame's bottom plate
+     lands squarely on the copyright and the Source link. Clearing it takes the
+     frame's inset from the page edge plus the depth the plate dips inward,
+     which HudFrame measures and publishes as --hud-bottom-art. The fallbacks
+     mean the footer is still correct if the frame is ever taken out. */
+  padding-bottom: calc(
+    1rem + var(--hud-inset, 0px) + var(--hud-bottom-art, 0px)
+  );
 }
 
 .site-footer a {

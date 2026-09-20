@@ -4,6 +4,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import MatrixBackground from './components/MatrixBackground';
+import HudFrame from './components/HudFrame';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -28,6 +29,7 @@ function App() {
       </Routes>
 
       <Footer />
+      <HudFrame />
     </Router>
   );
 }
