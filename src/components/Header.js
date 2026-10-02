@@ -1,13 +1,18 @@
 // Header.js
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { KEY_TAP_MS } from '../keyTap';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
-  // Close the menu whenever the route changes
-  useEffect(() => setOpen(false), [pathname]);
+  // Close the menu whenever the route changes - once the tapped key has had
+  // time to go down, so the press is seen before the menu folds away
+  useEffect(() => {
+    const t = setTimeout(() => setOpen(false), KEY_TAP_MS * 0.6);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   return (
     <header className="site-header">

@@ -100,9 +100,7 @@ body {
    neon orange outline sits over a hard cyan shadow thrown down and to the
    right, so at rest the key stands proud of the page; pressing it slides the
    key that same distance into its own shadow, which collapses to nothing - the
-   key reads as pushed flush with the panel. The fill stays transparent on
-   purpose: the text on this site is painted with a clipped gradient, and any
-   background here would be clipped with it. An outer box-shadow is never drawn
+   key reads as pushed flush with the panel. An outer box-shadow is never drawn
    under the box itself, so the cyan only ever shows as an L along the right
    and bottom edges. */
 .key {
@@ -110,48 +108,62 @@ body {
   --key-edge: var(--orange);
   --key-shadow: var(--cyan);
 
-  display: inline-block;
-  border: 1px solid var(--key-edge);
-
-  /* the same four shadows in every state, so the browser can tween between
+  /* the same four shadows in both states, so the browser can tween between
      them: the hard cyan block, a soft cyan bloom off it, then the outline's
      own glow outside and in */
-  box-shadow:
+  --key-up:
     var(--key-depth) var(--key-depth) 0 0 var(--key-shadow),
     var(--key-depth) var(--key-depth) 10px 0 var(--cyan-glow),
     0 0 6px 0 var(--orange-glow),
     inset 0 0 6px 0 var(--orange-glow);
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  --key-down:
+    0 0 0 0 var(--key-shadow),
+    0 0 0 0 var(--cyan-glow),
+    0 0 12px 0 var(--orange-glow),
+    inset 0 0 10px 0 var(--orange-glow);
+  --key-push: translate(var(--key-depth), var(--key-depth));
+
+  display: inline-block;
+  border: 1px solid var(--key-edge);
+  box-shadow: var(--key-up);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 
 /* pressed. :hover only where there is a real pointer - on a touchscreen a tap
    leaves :hover stuck on until the next tap elsewhere, which would leave the
-   key held down after the menu closes. :active still gives touch the press. */
+   key held down after the menu closes. */
 @media (hover: hover) {
   .key:hover {
     --key-edge: var(--orange-light);
-    transform: translate(var(--key-depth), var(--key-depth));
-    box-shadow:
-      0 0 0 0 var(--key-shadow),
-      0 0 0 0 var(--cyan-glow),
-      0 0 12px 0 var(--orange-glow),
-      inset 0 0 10px 0 var(--orange-glow);
+    transform: var(--key-push);
+    box-shadow: var(--key-down);
   }
 }
 .key:active,
 .key:focus-visible {
   --key-edge: var(--orange-light);
   outline: none;
-  transform: translate(var(--key-depth), var(--key-depth));
-  box-shadow:
-    0 0 0 0 var(--key-shadow),
-    0 0 0 0 var(--cyan-glow),
-    0 0 12px 0 var(--orange-glow),
-    inset 0 0 10px 0 var(--orange-glow);
+  transform: var(--key-push);
+  box-shadow: var(--key-down);
+}
+
+/* a tap. A finger is usually up again in under a tenth of a second, long
+   before the transition above has carried the key down, so :active alone
+   shows barely a twitch. keyTap.js adds .is-tapped on a touch tap instead,
+   and this plays the whole press through - down, a beat held, back up -
+   however short the tap was. Its length is KEY_TAP_MS in keyTap.js. */
+@keyframes key-tap {
+  0%, 100% { transform: none;           box-shadow: var(--key-up); }
+  40%, 60% { transform: var(--key-push); box-shadow: var(--key-down); }
+}
+.key.is-tapped {
+  --key-edge: var(--orange-light);
+  animation: key-tap 450ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .key { transition: none; }
+  .key.is-tapped { animation: none; }
 }
 
 /* links look: each link is a .key */
@@ -351,6 +363,19 @@ body::after {
   letter-spacing: inherit;
   line-height: 1.3;
 
+  /* solid black, so the matrix rain does not show through the key. The
+     overhead reflection (body::after) sits in a higher layer, so it still
+     falls across the fill. */
+  color: var(--orange);
+  background: #000;
+}
+
+/* the title's gradient lives on its own span: clipping a gradient to the text
+   needs the element's background, and the key's background is the black fill.
+   (One element can carry both as two background layers clipped differently,
+   but not every browser accepts a list of clips with `text` in it - those drop
+   the whole declaration and paint the gradient across the entire key.) */
+.accordion-toggle__label {
   color: transparent;
   background: linear-gradient(to bottom, var(--orange-light), var(--orange-deep));
   -webkit-background-clip: text;

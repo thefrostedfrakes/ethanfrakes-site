@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import MatrixBackground from './components/MatrixBackground';
 import HudFrame from './components/HudFrame';
+import { useKeyTap } from './keyTap';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,6 +16,8 @@ import Contact from './pages/Contact';
 import './App.css';
 
 function App() {
+  useKeyTap();
+
   return (
     <Router>
       <MatrixBackground />

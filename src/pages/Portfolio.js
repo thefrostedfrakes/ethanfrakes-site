@@ -20,7 +20,7 @@ function AccordionHeader({ title, open, onToggle }) {
   return (
     <h2 className="accordion-header">
       <button type="button" className="key accordion-toggle" aria-expanded={open} onClick={onToggle}>
-        {title}
+        <span className="accordion-toggle__label">{title}</span>
         {open ? <FaChevronUp aria-hidden="true" /> : <FaChevronDown aria-hidden="true" />}
       </button>
     </h2>
