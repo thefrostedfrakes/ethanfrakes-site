@@ -56,7 +56,11 @@ body {
   border-bottom: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 2px 14px rgba(0,0,0,.4);
   z-index: 1000;
-  font-size: min(2.5vh, 30px);
+  /* height-driven, but capped by width too: a tall window just above the
+     mobile breakpoint otherwise sizes the keys off its height and runs them
+     over the logo and off the right edge. 2.4vw keeps the row of keys inside
+     the bar at every width down to the breakpoint. */
+  font-size: min(2.5vh, 30px, 2.4vw);
 }
 .site-nav__inner {
   position: relative;
@@ -92,16 +96,80 @@ body {
   mask: url('./images/logo.svg') center / contain no-repeat;
 }
 
-/* links look */
+/* .key: a pressable key, used by the nav links and the Portfolio dropdowns. A
+   neon orange outline sits over a hard cyan shadow thrown down and to the
+   right, so at rest the key stands proud of the page; pressing it slides the
+   key that same distance into its own shadow, which collapses to nothing - the
+   key reads as pushed flush with the panel. The fill stays transparent on
+   purpose: the text on this site is painted with a clipped gradient, and any
+   background here would be clipped with it. An outer box-shadow is never drawn
+   under the box itself, so the cyan only ever shows as an L along the right
+   and bottom edges. */
+.key {
+  --key-depth: 4px;               /* how far the key stands off the page */
+  --key-edge: var(--orange);
+  --key-shadow: var(--cyan);
+
+  display: inline-block;
+  border: 1px solid var(--key-edge);
+
+  /* the same four shadows in every state, so the browser can tween between
+     them: the hard cyan block, a soft cyan bloom off it, then the outline's
+     own glow outside and in */
+  box-shadow:
+    var(--key-depth) var(--key-depth) 0 0 var(--key-shadow),
+    var(--key-depth) var(--key-depth) 10px 0 var(--cyan-glow),
+    0 0 6px 0 var(--orange-glow),
+    inset 0 0 6px 0 var(--orange-glow);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+/* pressed. :hover only where there is a real pointer - on a touchscreen a tap
+   leaves :hover stuck on until the next tap elsewhere, which would leave the
+   key held down after the menu closes. :active still gives touch the press. */
+@media (hover: hover) {
+  .key:hover {
+    --key-edge: var(--orange-light);
+    transform: translate(var(--key-depth), var(--key-depth));
+    box-shadow:
+      0 0 0 0 var(--key-shadow),
+      0 0 0 0 var(--cyan-glow),
+      0 0 12px 0 var(--orange-glow),
+      inset 0 0 10px 0 var(--orange-glow);
+  }
+}
+.key:active,
+.key:focus-visible {
+  --key-edge: var(--orange-light);
+  outline: none;
+  transform: translate(var(--key-depth), var(--key-depth));
+  box-shadow:
+    0 0 0 0 var(--key-shadow),
+    0 0 0 0 var(--cyan-glow),
+    0 0 12px 0 var(--orange-glow),
+    inset 0 0 10px 0 var(--orange-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key { transition: none; }
+}
+
+/* links look: each link is a .key */
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .site-nav__links a {
   color: var(--orange);
   text-decoration: none;
   font-weight: 700;
-  padding: 0 .75rem;
+  padding: .3em .8em;
+  line-height: 1.3;
   font-size: 0.85em;
   text-transform: uppercase;
 }
-.site-nav__links a:hover { text-decoration: underline; }
 
 /* hamburger button (hidden on desktop) */
 .site-nav__toggle {
@@ -120,7 +188,7 @@ body {
   display: block;
   height: 2px;
   width: 30px;
-  background: #fff;
+  background: #ff7518;
   margin: 0 auto;
   transition: transform .2s ease;
 }
@@ -142,16 +210,20 @@ body {
     position: absolute;
     top: 100%; left: 0; right: 0;
     flex-direction: column;
-    gap: .5rem;
+    align-items: stretch;
+    gap: .85rem;
     background: linear-gradient(180deg, rgba(15,15,15,.98), rgba(15,15,15,.92));
     border-bottom: 1px solid rgba(255,255,255,0.08);
     padding: .75rem 1rem 1rem;
     box-shadow: 0 8px 20px rgba(0,0,0,.45);
   }
 
+  /* full-width keys, one per row. The right margin keeps each key's shadow
+     inside the dropdown's padding instead of running into its edge. */
   .site-nav.is-open .site-nav__links a {
-    padding: .4rem 0;
     display: block;                 /* tap-friendly rows */
+    padding: .55rem .9rem;
+    margin-right: var(--key-depth);
   }
 }
 
@@ -248,12 +320,50 @@ body::after {
   mask-image: var(--strike-mask);
 }
 
+/* a dropdown's heading: an h2 holding one .key button with the title and its
+   chevron. The gradient text is painted by the button rather than the h2 -
+   left on the h2 it would stay put while the key slides, leaving a ghost of
+   the title behind - so the h2 here only places the button. */
 .accordion-header {
   display: flex;
+  justify-content: center;
+  margin: 2.75rem 0 .83em;
+  /* the h2's own 1.5em, until a phone is too narrow for the widest key -
+     EXPERIENCE plus its chevron - to clear the HUD frame */
+  font-size: min(1.5em, 7.5vw);
+}
+.site-content .accordion-header {
+  background: none;
+}
+
+.accordion-toggle {
+  --key-depth: 5px;           /* a bigger key than the nav's, a deeper throw */
+
+  display: inline-flex;
   align-items: center;
-  justify-content: center;  /* center the h2 + chevron */
+  gap: .5em;
+  padding: .3em .7em;
   cursor: pointer;
-  margin-top: 2rem;         /* if you want extra spacing */
+  /* buttons do not inherit type by default; this one sets as the h2 does */
+  font: inherit;
+  text-transform: inherit;
+  text-shadow: inherit;
+  letter-spacing: inherit;
+  line-height: 1.3;
+
+  color: transparent;
+  background: linear-gradient(to bottom, var(--orange-light), var(--orange-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* the chevron is not text, so the clipped gradient cannot reach it: it is
+   filled solid, with a glow to match the title's text-shadow */
+.accordion-toggle svg {
+  flex: none;
+  font-size: .7em;
+  color: var(--orange);
+  filter: drop-shadow(0 0 5px var(--orange-glow));
 }
 
 .accordion-content {
@@ -585,8 +695,10 @@ body::after {
   align-items: center;
   margin-right: 1.5rem;   /* space between items */
   margin-bottom: 0.5rem;  /* wrap spacing */
+  text-align: left;
 }
 .skills-list li svg {
+  flex: none;             /* the icon keeps its size; the label wraps instead */
   margin-right: 0.4rem;   /* space between icon and text */
   vertical-align: middle;
 }

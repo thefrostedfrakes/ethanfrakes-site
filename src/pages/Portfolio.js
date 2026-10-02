@@ -13,6 +13,20 @@ import { DiW3C, DiScrum } from "react-icons/di";
 import { MdViewKanban } from "react-icons/md";
 import { TbSql, TbWorldBolt } from "react-icons/tb";
 
+/* A dropdown's heading. The toggle is a real <button> inside the h2, so it is
+   reachable and operable from the keyboard and announces whether its section
+   is open; styled as a .key, like the nav links. */
+function AccordionHeader({ title, open, onToggle }) {
+  return (
+    <h2 className="accordion-header">
+      <button type="button" className="key accordion-toggle" aria-expanded={open} onClick={onToggle}>
+        {title}
+        {open ? <FaChevronUp aria-hidden="true" /> : <FaChevronDown aria-hidden="true" />}
+      </button>
+    </h2>
+  );
+}
+
 export default function Portfolio() {
   const [skillsOpen, setSkillsOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
@@ -24,13 +38,11 @@ export default function Portfolio() {
       <h1>Portfolio</h1>
 
       {/* SKILLS SECTION */}
-      <div 
-        className="accordion-header" 
-        onClick={() => setSkillsOpen(open => !open)}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-        <h2 style={{ marginRight: '0.5rem' }}>Skills</h2>
-        {skillsOpen ? <FaChevronUp /> : <FaChevronDown />}
-      </div>
+      <AccordionHeader
+        title="Skills"
+        open={skillsOpen}
+        onToggle={() => setSkillsOpen(open => !open)}
+      />
       {skillsOpen && (
         <div className="accordion-content">
           <h3>Programming &amp; Scripting Languages:</h3>
@@ -104,13 +116,11 @@ export default function Portfolio() {
         </div>)}
 
       {/* PROJECTS SECTION */}
-      <div 
-        className="accordion-header" 
-        onClick={() => setProjectsOpen(open => !open)}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-        <h2 style={{ marginRight: '0.5rem' }}>Projects</h2>
-        {projectsOpen ? <FaChevronUp /> : <FaChevronDown />}
-      </div>
+      <AccordionHeader
+        title="Projects"
+        open={projectsOpen}
+        onToggle={() => setProjectsOpen(open => !open)}
+      />
       {projectsOpen && (
         <div className="accordion-content">
           <div className="text-box">
@@ -171,13 +181,11 @@ export default function Portfolio() {
         </div>)}
 
       {/* EXPERIENCE SECTION */}
-      <div 
-        className="accordion-header" 
-        onClick={() => setExperienceOpen(open => !open)}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-        <h2 style={{ marginRight: '0.5rem' }}>Experience</h2>
-        {experienceOpen ? <FaChevronUp /> : <FaChevronDown />}
-      </div>
+      <AccordionHeader
+        title="Experience"
+        open={experienceOpen}
+        onToggle={() => setExperienceOpen(open => !open)}
+      />
       {experienceOpen && (
         <div className="accordion-content">
           <div className="text-box">
@@ -213,13 +221,11 @@ export default function Portfolio() {
         </div>)}
 
       {/* EDUCATION SECTION */}
-      <div 
-        className="accordion-header" 
-        onClick={() => setEducationOpen(open => !open)}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-        <h2 style={{ marginRight: '0.5rem' }}>Education</h2>
-        {educationOpen ? <FaChevronUp /> : <FaChevronDown />}
-      </div>
+      <AccordionHeader
+        title="Education"
+        open={educationOpen}
+        onToggle={() => setEducationOpen(open => !open)}
+      />
       {educationOpen && (
         <div className="accordion-content">
           <div className="text-box">

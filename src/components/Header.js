@@ -18,11 +18,11 @@ export default function Header() {
           </Link>
           {/* centered links (desktop), hidden on mobile until toggled */}
           <div id="primary-navigation" className="site-nav__links">
-            <Link to="/">Home</Link>{' '}
-            <Link to="/about">About</Link>{' '}
-            <Link to="/portfolio">Portfolio</Link>{' '}
-            <Link to="/publications">Publications</Link>{' '}
-            <Link to="/contact">Contact</Link>
+            <Link to="/" className="key">Home</Link>{' '}
+            <Link to="/about" className="key">About</Link>{' '}
+            <Link to="/portfolio" className="key">Portfolio</Link>{' '}
+            <Link to="/publications" className="key">Publications</Link>{' '}
+            <Link to="/contact" className="key">Contact</Link>
           </div>
 
           {/* hamburger at right (mobile only) */}

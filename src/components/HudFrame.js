@@ -220,26 +220,38 @@ export default function HudFrame() {
     return () => ro.disconnect();
   }, []);
 
-  const art = box.w > 0 && box.h > 0 ? buildFrame(box.w, box.h) : null;
+  /* The box runs under the nav bar; the artwork starts below it. Dropping the
+     svg rather than the box is what keeps this box's size independent of the
+     bar - see the note on `top` in HudFrame.css. */
+  const artH = box.h - box.navH;
+  const art = box.w > 0 && artH > 0 ? buildFrame(box.w, artH) : null;
   const bottomArt = art ? art.bottomArt : 0;
 
   /* The footer is the last thing in the document, so it is what the bottom
      plate lands on top of. Publishing the plate's depth lets the footer
      reserve exactly that much room; deriving it here rather than repeating
      the plate's proportions as a vw formula in the stylesheet keeps the two
-     from drifting apart if the artwork is ever retuned. */
+     from drifting apart if the artwork is ever retuned.
+
+     Written on the next animation frame, not here: this effect runs inside
+     the ResizeObserver callback (flushSync flushes effects too), and changing
+     the footer's padding there resizes the page - and so the observed box -
+     mid-callback, which is a "ResizeObserver loop" error. Next frame, the
+     observer picks the new height up and redraws before that frame paints, so
+     the artwork never shows out of step with the page. */
   useEffect(() => {
     const el = document.documentElement;
-    el.style.setProperty('--hud-bottom-art', bottomArt + 'px');
-    return () => el.style.removeProperty('--hud-bottom-art');
+    const id = requestAnimationFrame(() =>
+      el.style.setProperty('--hud-bottom-art', bottomArt + 'px'));
+    return () => cancelAnimationFrame(id);
   }, [bottomArt]);
+  useEffect(() => () => document.documentElement.style.removeProperty('--hud-bottom-art'), []);
 
   return (
     <div
       ref={boxRef}
       className="hud"
       aria-hidden="true"
-      style={{ top: 'calc(' + box.navH + 'px + var(--hud-inset))' }}
     >
       {/* The svg is drawn at its natural size and pinned to the top left rather
           than stretched to fill the box. The two are identical once a
@@ -251,9 +263,10 @@ export default function HudFrame() {
       {art && (
         <svg
           className="hud__art"
+          style={{ top: box.navH }}
           width={box.w}
-          height={box.h}
-          viewBox={'0 0 ' + box.w + ' ' + box.h}
+          height={artH}
+          viewBox={'0 0 ' + box.w + ' ' + artH}
           preserveAspectRatio="none"
           focusable="false"
         >

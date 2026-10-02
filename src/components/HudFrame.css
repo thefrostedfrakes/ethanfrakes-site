@@ -21,8 +21,13 @@
   --hud-rule: 2px;
 
   position: absolute;
-  /* `top` is set from the component, measured off the fixed nav bar so the
-     frame starts below it instead of scrolling out from under it at rest */
+  /* inset the same on all four sides, so this box's size depends only on the
+     page. Clearing the fixed nav bar is done inside it, by the component
+     dropping the artwork down by the bar's height: if this box's own `top`
+     followed the bar instead, every change in bar height would resize the box
+     the ResizeObserver is watching from inside its own callback, which is a
+     "ResizeObserver loop" error. */
+  top: var(--hud-inset);
   left: var(--hud-inset);
   right: var(--hud-inset);
   bottom: var(--hud-inset);
@@ -41,7 +46,8 @@
 .hud__art {
   /* top left only, and no width/height here: the element takes its size from
      the width and height attributes the component sets in pixels, so the
-     artwork is never scaled to fit its box - see the note at the <svg> */
+     artwork is never scaled to fit its box - see the note at the <svg>. `top`
+     is set from the component to the nav bar's height. */
   position: absolute;
   top: 0;
   left: 0;
