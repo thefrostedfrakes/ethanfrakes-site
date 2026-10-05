@@ -15,12 +15,12 @@ import { TbSql, TbWorldBolt } from "react-icons/tb";
 
 /* A dropdown's heading. The toggle is a real <button> inside the h2, so it is
    reachable and operable from the keyboard and announces whether its section
-   is open; styled as a .key, like the nav links. */
+   is open; styled as a .key-big, like the Contact links. */
 function AccordionHeader({ title, open, onToggle }) {
   return (
-    <h2 className="accordion-header">
-      <button type="button" className="key accordion-toggle" aria-expanded={open} onClick={onToggle}>
-        <span className="accordion-toggle__label">{title}</span>
+    <h2 className="key-row">
+      <button type="button" className="key key-big" aria-expanded={open} onClick={onToggle}>
+        <span className="key-big__label">{title}</span>
         {open ? <FaChevronUp aria-hidden="true" /> : <FaChevronDown aria-hidden="true" />}
       </button>
     </h2>
@@ -133,13 +133,14 @@ export default function Portfolio() {
               The source ontology, GeoOutageOnto, contains data classes for numeric outage records, nightly NTL images, power outage maps calculated using the NTL imagery, and storm, hurricane, and social vulnerability records, and is aligned with the Materials Data Science Ontology (MDS-Onto).
               GeoOutageKG is a large knowledge graph with over 11.7 million outage record instances, 2 million storm event instances, 335,000 NTL image instances, and 190,000 outage map instances, totaling over 14.2 million instances and 164 million triples.<br/><br/>
 
-              GeoOutageKG 1.0 was previously accepted to and published in the 24th International Semantic Web Conference (ISWC 2025) in Nara, Japan. The citation can be found on the Publications page.<br/><br/>
-
-              <TbWorldBolt/><a href="https://geo-resilience.com/">GeoResilience Sandbox</a>
-              <SiGithub/><a href="https://purl.org/geooutagekg">GitHub Repository</a>
-              <SiOsf/><a href="https://doi.org/10.17605/OSF.IO/QVD8B">OSF Repository</a>
-              <SiArxiv/><a href="https://doi.org/10.48550/arXiv.2507.22878">arXiv Preprint</a>
+              GeoOutageKG 1.0 was previously accepted to and published in the 24th International Semantic Web Conference (ISWC 2025) in Nara, Japan. The citation can be found on the Publications page.
             </p>
+            <ul className="link-list">
+              <li><TbWorldBolt/><a href="https://geo-resilience.com/" target="_blank" rel="noopener noreferrer">GeoResilience Sandbox</a></li>
+              <li><SiGithub/><a href="https://purl.org/geooutagekg" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+              <li><SiOsf/><a href="https://doi.org/10.17605/OSF.IO/QVD8B" target="_blank" rel="noopener noreferrer">OSF Repository</a></li>
+              <li><SiArxiv/><a href="https://doi.org/10.48550/arXiv.2507.22878" target="_blank" rel="noopener noreferrer">arXiv Preprint</a></li>
+            </ul>
           </div>
           <div className="text-box">
             <h3>UCF Crimes</h3>
@@ -149,12 +150,13 @@ export default function Portfolio() {
               UCF Crimes utilizes a back- and front-end framework for reading and parsing crimes from the official UCF crime report log and posting crimes daily.<br/>
               - Back end: reads from daily crime report log posted every night, parses returned string containing crime data, and adds crime reports and information to SQL database, including the crime type, report date & time, disposition, and address. While adding to database, crime address is geocoded using the Google Maps Geocoder API, then nearest place marker is identified using Google Places API. Both geocoded data and raw data from PDF are added to database.<br/>
               - Front-end: Posts to Instagram account using API daily with crime title, place marker name, report date/time, and disposition, along with image of map with location from geocoded coordinates of address. Also posts daily to Discord server using Discord API, where users can also query individual crime reports by title, report date, disposition, address, or place name.<br/>
-              Have so far parsed over 2,300 crime reports and all available to query in the database.<br/><br/>
-
-              <SiGithub/><a href="https://github.com/thefrostedfrakes/UCF-Crimes">GitHub Repository</a>
-              <SiInstagram/><a href="https://www.instagram.com/ucfcrimes">Instagram</a>
-              <SiDiscord/><a href="https://discord.gg/Ph69Wktxfz">Discord</a>
+              Have so far parsed over 2,300 crime reports and all available to query in the database.
             </p>
+            <ul className="link-list">
+              <li><SiGithub/><a href="https://github.com/thefrostedfrakes/UCF-Crimes" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+              <li><SiInstagram/><a href="https://www.instagram.com/ucfcrimes" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><SiDiscord/><a href="https://discord.gg/Ph69Wktxfz" target="_blank" rel="noopener noreferrer">Discord</a></li>
+            </ul>
           </div>
           <div className="text-box">
             <h3>RE-RASSOR Autonomy</h3>
@@ -174,9 +176,11 @@ export default function Portfolio() {
             <h3>TopTier Games</h3>
             <p><small className="date-range">October 2023 - November 2023</small></p>
             <p>
-              Social cataloging service for cataloging and ranking video games. Directly worked on Android mobile application. Implemented user interface for search page, game description modal, adding games to library, email verification page, and user account settings including password reset.<br/><br/>
-              <SiGithub/><a href="https://github.com/thefrostedfrakes/TopTier-Games">GitHub Repository</a>
+              Social cataloging service for cataloging and ranking video games. Directly worked on Android mobile application. Implemented user interface for search page, game description modal, adding games to library, email verification page, and user account settings including password reset.
             </p>
+            <ul className="link-list">
+              <li><SiGithub/><a href="https://github.com/thefrostedfrakes/TopTier-Games" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+            </ul>
           </div>
         </div>)}
 

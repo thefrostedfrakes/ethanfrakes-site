@@ -1,0 +1,221 @@
+/* The site's color themes, kept apart from App.css so the palettes are easy
+   to find and add to. Adding one is a block here plus a line in theme.js.
+
+   Every color on the site comes from these variables. --primary is the text,
+   the nav keys and the name; --accent is the keys' shadow, the boxes, the HUD
+   frame and the matrix rain. A theme is the set of values for one data-theme,
+   and theme.js puts the chosen one on <html>.
+
+   The selectors are bare attribute selectors rather than :root ones, so they
+   work on any element: the picker's options each carry their own data-theme,
+   which makes every option a preview drawn in its own theme's colors. The
+   default has to name itself for the same reason - on <html> the :root half
+   is what applies; on an option, [data-theme="default"] puts the default
+   colors back inside a page that is showing another theme.
+
+   Several of the palettes come from cool-retro-term's built-in profiles
+   (github.com/Swordfish90/cool-retro-term). The single-color ones pair a
+   bright and a darker shade of one phosphor, so the keys' shadow still reads
+   as a separate edge. */
+:root,
+[data-theme="default"] {
+  /* neon: orange over the Encom boardroom cyan */
+  --primary: #ff7518;
+  --primary-light: #ff8c1f;
+  --primary-deep: #ff6205;
+  --primary-glow: rgba(255, 98, 5, 0.5);
+
+  --accent: #00eeee;
+  --accent-light: #8fd8d8;
+  --accent-deep: #00eeee;
+  --accent-dim: #6fc0ba;
+  --accent-code: #8fd8d8;
+  --accent-glow: rgba(0, 238, 238, 0.5);
+
+  /* the hero's backdrop, a dark tint of the accent */
+  --hero-bg-top: rgba(27, 47, 45, 0.85);
+  --hero-bg-mid: rgba(16, 28, 27, 0.8);
+}
+
+[data-theme="amber"] {
+  /* cool-retro-term's Default Amber over a yellower P3 amber */
+  --primary: #ff8100;
+  --primary-light: #ffa030;
+  --primary-deep: #ff6a00;
+  --primary-glow: rgba(255, 106, 0, 0.5);
+
+  --accent: #ffb000;
+  --accent-light: #ffd060;
+  --accent-deep: #ffb000;
+  --accent-dim: #c78a12;
+  --accent-code: #ffd060;
+  --accent-glow: rgba(255, 176, 0, 0.5);
+
+  --hero-bg-top: rgba(48, 34, 14, 0.85);
+  --hero-bg-mid: rgba(28, 20, 8, 0.8);
+}
+
+[data-theme="mono"] {
+  /* black and white: Commodore PET white over IBM VGA grey */
+  --primary: #ffffff;
+  --primary-light: #ffffff;
+  --primary-deep: #cfcfcf;
+  --primary-glow: rgba(255, 255, 255, 0.4);
+
+  --accent: #c0c0c0;
+  --accent-light: #e6e6e6;
+  --accent-deep: #b0b0b0;
+  --accent-dim: #8a8a8a;
+  --accent-code: #d8d8d8;
+  --accent-glow: rgba(192, 192, 192, 0.4);
+
+  --hero-bg-top: rgba(40, 40, 40, 0.85);
+  --hero-bg-mid: rgba(24, 24, 24, 0.8);
+}
+
+[data-theme="turquoise"] {
+  --primary: #40e0d0;
+  --primary-light: #8ff0e6;
+  --primary-deep: #20cfc0;
+  --primary-glow: rgba(64, 224, 208, 0.5);
+
+  --accent: #179c92;
+  --accent-light: #5cc8bf;
+  --accent-deep: #179c92;
+  --accent-dim: #149085;
+  --accent-code: #7fd8d0;
+  --accent-glow: rgba(23, 156, 146, 0.5);
+
+  --hero-bg-top: rgba(22, 48, 46, 0.85);
+  --hero-bg-mid: rgba(13, 29, 28, 0.8);
+}
+
+[data-theme="blue"] {
+  /* cool-retro-term's Deep Blue */
+  --primary: #7fb4ff;
+  --primary-light: #b0d0ff;
+  --primary-deep: #5f9cff;
+  --primary-glow: rgba(95, 156, 255, 0.5);
+
+  --accent: #4d7fff;
+  --accent-light: #8fb0ff;
+  --accent-deep: #4d7fff;
+  --accent-dim: #5577dd;
+  --accent-code: #a6c4ff;
+  --accent-glow: rgba(77, 127, 255, 0.5);
+
+  --hero-bg-top: rgba(20, 32, 56, 0.85);
+  --hero-bg-mid: rgba(12, 19, 34, 0.8);
+}
+
+[data-theme="plasma"] {
+  /* cool-retro-term's Plasma pink over a violet */
+  --primary: #ff9bd6;
+  --primary-light: #ffc4e7;
+  --primary-deep: #ff6fc4;
+  --primary-glow: rgba(255, 111, 196, 0.5);
+
+  --accent: #b47cff;
+  --accent-light: #d4b3ff;
+  --accent-deep: #b47cff;
+  --accent-dim: #8a5fd0;
+  --accent-code: #d4b3ff;
+  --accent-glow: rgba(180, 124, 255, 0.5);
+
+  --hero-bg-top: rgba(46, 20, 48, 0.85);
+  --hero-bg-mid: rgba(28, 12, 29, 0.8);
+}
+
+[data-theme="cyberpunk"] {
+  /* Cyberpunk 2077's UI: signal red over cyan */
+  --primary: #ff003c;
+  --primary-light: #ff4d6f;
+  --primary-deep: #e6002f;
+  --primary-glow: rgba(255, 0, 60, 0.5);
+
+  --accent: #00f0ff;
+  --accent-light: #8ff6ff;
+  --accent-deep: #00f0ff;
+  --accent-dim: #4fb8c2;
+  --accent-code: #8ff6ff;
+  --accent-glow: rgba(0, 240, 255, 0.5);
+
+  --hero-bg-top: rgba(46, 14, 22, 0.85);
+  --hero-bg-mid: rgba(28, 8, 13, 0.8);
+}
+
+[data-theme="red"] {
+  /* red alert: submarine and darkroom lighting. Red is a dark hue to the eye,
+     so the accent can only step down a little before the text in the boxes
+     stops reading against black - it shifts toward crimson instead, which is
+     what keeps the keys' shadow a separate edge. */
+  --primary: #ff4545;
+  --primary-light: #ff8080;
+  --primary-deep: #ff2a2a;
+  --primary-glow: rgba(255, 42, 42, 0.5);
+
+  --accent: #e0323f;
+  --accent-light: #ff6b7a;
+  --accent-deep: #e0323f;
+  --accent-dim: #d63a4a;
+  --accent-code: #ff8a95;
+  --accent-glow: rgba(224, 50, 63, 0.5);
+
+  --hero-bg-top: rgba(48, 14, 14, 0.85);
+  --hero-bg-mid: rgba(29, 8, 8, 0.8);
+}
+
+[data-theme="matrix"] {
+  /* the film's code green. Its darkest shade, #008f11, is too dim to read as
+     text, so it is kept for the date lines and the accent sits a step up. */
+  --primary: #00ff41;
+  --primary-light: #7dff9a;
+  --primary-deep: #00e03a;
+  --primary-glow: rgba(0, 255, 65, 0.5);
+
+  --accent: #00a81f;
+  --accent-light: #4fd96a;
+  --accent-deep: #00a81f;
+  --accent-dim: #008f11;
+  --accent-code: #6fe88a;
+  --accent-glow: rgba(0, 168, 31, 0.5);
+
+  --hero-bg-top: rgba(8, 40, 14, 0.85);
+  --hero-bg-mid: rgba(4, 24, 8, 0.8);
+}
+
+[data-theme="vector"] {
+  /* the blue-white of vector arcade tubes - Asteroids, Tempest */
+  --primary: #e0f7ff;
+  --primary-light: #ffffff;
+  --primary-deep: #b8ecff;
+  --primary-glow: rgba(127, 219, 255, 0.5);
+
+  --accent: #7fdbff;
+  --accent-light: #c2efff;
+  --accent-deep: #7fdbff;
+  --accent-dim: #5aa9c8;
+  --accent-code: #b0e8ff;
+  --accent-glow: rgba(127, 219, 255, 0.5);
+
+  --hero-bg-top: rgba(20, 38, 48, 0.85);
+  --hero-bg-mid: rgba(12, 23, 29, 0.8);
+}
+
+[data-theme="ghost"] {
+  /* cool-retro-term's Ghost Terminal: slate grey, with the glow turned down */
+  --primary: #a6b3c0;
+  --primary-light: #c9d3dc;
+  --primary-deep: #8e9cab;
+  --primary-glow: rgba(166, 179, 192, 0.3);
+
+  --accent: #6b7a89;
+  --accent-light: #9aa8b6;
+  --accent-deep: #6b7a89;
+  --accent-dim: #6f7d8b;
+  --accent-code: #a6b3c0;
+  --accent-glow: rgba(107, 122, 137, 0.3);
+
+  --hero-bg-top: rgba(30, 36, 42, 0.85);
+  --hero-bg-mid: rgba(18, 22, 26, 0.8);
+}

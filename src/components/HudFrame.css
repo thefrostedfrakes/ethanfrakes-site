@@ -16,8 +16,8 @@
 }
 
 .hud {
-  --hud-color: var(--cyan);
-  --hud-glow: var(--cyan-glow);
+  --hud-color: var(--accent);
+  --hud-glow: var(--accent-glow);
   --hud-rule: 2px;
 
   position: absolute;

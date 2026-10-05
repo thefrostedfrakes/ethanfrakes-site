@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="site-footer">
       <p>&copy; {new Date().getFullYear()} Ethan Frakes</p>
       <p><small>v{packageJson.version}</small></p>
-      <p><small><a href="https://github.com/thefrostedfrakes/ethanfrakes-site">Source</a></small></p>
+      <p><small><a className="key" href="https://github.com/thefrostedfrakes/ethanfrakes-site" target="_blank" rel="noopener noreferrer">Source</a></small></p>
     </footer>
   );
 }

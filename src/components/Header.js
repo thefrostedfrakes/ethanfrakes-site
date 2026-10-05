@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { KEY_TAP_MS } from '../keyTap';
+import ThemePicker from './ThemePicker';
 
-export default function Header() {
+export default function Header({ theme, onThemeChange }) {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -29,6 +30,10 @@ export default function Header() {
             <Link to="/publications" className="key">Publications</Link>{' '}
             <Link to="/contact" className="key">Contact</Link>
           </div>
+
+          {/* color theme menu: after the links on desktop, beside the
+              hamburger on mobile */}
+          <ThemePicker theme={theme} onChange={onThemeChange} onOpen={() => setOpen(false)} />
 
           {/* hamburger at right (mobile only) */}
           <button

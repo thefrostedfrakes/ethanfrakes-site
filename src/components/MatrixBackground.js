@@ -66,7 +66,7 @@ class Matrix {
         this.ctx.fillRect(0, 0, this.w, this.h);
 
         // Text style
-        this.ctx.fillStyle = `rgb(${this.color[0]},${this.color[1]},${this.color[2]})`;
+        this.ctx.fillStyle = this.color;
         this.ctx.font = `${this.fontSize}px hina mincho, times new roman`;
         this.ctx.textBaseline = 'top';
         this.ctx.textAlign = "center";
@@ -88,14 +88,18 @@ class Matrix {
     }
 }
 
-export default function MatrixBackground() {
+// the rain is drawn in the theme's accent, read off <html> where theme.js puts it
+const accentColor = () =>
+  getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00eeee';
+
+export default function MatrixBackground({ theme }) {
   const canvasRef = useRef(null);
+  const matrixRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const color = [0, 238, 238]; // #00eeee, the Encom boardroom cyan
     const charRanges = [
       [0x0030, 0x0039],  // Digits
       [0x0041, 0x005A],  // Alphabet
@@ -106,7 +110,8 @@ export default function MatrixBackground() {
     const fontSize = 12;
     const speed = 5;
     const lineSpacing = 1.8;
-    const matrix = new Matrix(canvas, color, fontSize, charRanges, speed, lineSpacing);
+    const matrix = new Matrix(canvas, accentColor(), fontSize, charRanges, speed, lineSpacing);
+    matrixRef.current = matrix;
 
     const handleResize = () => matrix.onResize();
     handleResize();
@@ -123,8 +128,16 @@ export default function MatrixBackground() {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
+      matrixRef.current = null;
     };
   }, []);
+
+  // A theme change recolors only the new characters: the ones already on
+  // screen fade out in the old color, so the rain changes over the way a
+  // phosphor would rather than snapping.
+  useEffect(() => {
+    if (matrixRef.current) matrixRef.current.color = accentColor();
+  }, [theme]);
 
   // Render the canvas (positioned behind everything)
   return (
