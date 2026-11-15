@@ -1,0 +1,34 @@
+name: personal-website
+
+services:
+  web:
+    build: .
+    container_name: ethanfrakes-web
+    # Public traffic arrives via the Cloudflare Tunnel (cloudflared service
+    # below), which reaches this container over the internal Docker network as
+    # http://web:8080. The host port is bound to loopback only, so the site is
+    # NOT on the LAN — this mapping is just for local debugging on the server
+    # (curl http://localhost:8090). 8090 avoids the ports GeoResilienceSandbox
+    # already uses on the same host (3000, 7200, 8001, 8081).
+    ports:
+      - "127.0.0.1:8090:8080"
+    restart: unless-stopped
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: ethanfrakes-cloudflared
+    # Outbound-only Cloudflare Tunnel connector — publishes the site at
+    # ethanfrakes.com and www.ethanfrakes.com with automatic HTTPS and no
+    # inbound ports opened on the router. Routing comes from the Cloudflare
+    # dashboard (Zero Trust → Networks → Tunnels → ethanfrakes), since a
+    # token-run connector takes its config from Cloudflare, not a local file:
+    #   ethanfrakes.com     -> http://web:8080
+    #   www.ethanfrakes.com -> http://web:8080   (nginx 301s it to the apex)
+    # The token identifies the tunnel + account — keep the real value in .env.
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:?set CLOUDFLARE_TUNNEL_TOKEN in .env}
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
