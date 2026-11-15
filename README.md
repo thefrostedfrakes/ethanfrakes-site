@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# ethanfrakes.com
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal website — a Create React App single-page app, self-hosted.
 
-## Available Scripts
+```
+visitor ──HTTPS──> Cloudflare edge ──tunnel (outbound from server)──> cloudflared ──> web (nginx :8080)
+```
 
-In the project directory, you can run:
+| Service       | Container                 | What it does                                                   |
+|---------------|---------------------------|----------------------------------------------------------------|
+| `web`         | `ethanfrakes-web`         | Multi-stage build: `npm run build`, then unprivileged nginx serves `build/` |
+| `cloudflared` | `ethanfrakes-cloudflared` | Tunnel connector for `ethanfrakes.com` + `www.ethanfrakes.com` |
 
-### `npm start`
+The `web` port is bound to `127.0.0.1:8090` only, for debugging on the server;
+it is not reachable from the LAN. `www` is 301-redirected to the apex by nginx.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Deploy / update on the server
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/thefrostedfrakes/ethanfrakes-site.git personal-website
+cd personal-website
+cp .env.example .env          # paste CLOUDFLARE_TUNNEL_TOKEN
+docker compose up -d --build
+```
 
-### `npm test`
+To publish changes: `git pull && docker compose up -d --build`. Only the `web`
+image rebuilds; the tunnel stays up.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Checks on the server:
 
-### `npm run build`
+```bash
+docker compose ps                         # both services Up, web (healthy)
+curl -s http://localhost:8090/healthz     # ok
+docker compose logs -f cloudflared        # "Registered tunnel connection" x4
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Cloudflare setup (one time)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Zero Trust → Networks → Tunnels → Create a tunnel** (Cloudflared), name it
+   `ethanfrakes`, copy the token into `.env`.
+2. In **DNS → Records**, delete the four GitHub Pages `A` records on
+   `ethanfrakes.com` and the `www` CNAME to `thefrostedfrakes.github.io`.
+3. Back in the tunnel, **Public Hostnames → Add**:
+   - `ethanfrakes.com` → `HTTP` → `web:8080`
+   - `www.ethanfrakes.com` → `HTTP` → `web:8080`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   Cloudflare creates the proxied `CNAME → <tunnel-id>.cfargotunnel.com`
+   records itself.
+4. Disable GitHub Pages in the repo settings once the site loads from the server.
 
-### `npm run eject`
+## Local development
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm install
+npm start        # http://localhost:3000, hot reload
+npm run build    # production bundle in build/
+```
